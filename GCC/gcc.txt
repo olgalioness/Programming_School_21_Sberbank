@@ -1,0 +1,6 @@
+gcc test.c -o test.exe
+
+gcc -Wall -Wextra -Werror 
+
+gcc -Wall -Wextra -Werror hello2.c -o hello2.exe
+
