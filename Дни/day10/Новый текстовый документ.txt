@@ -1,0 +1,13 @@
+Day10 Makefile
+16.7.19
+http://embedded.ifmo.ru/sdk/sdk11/soft/make/make.pdf
+
+https://ru.bmstu.wiki/Makefile
+
+https://m.habr.com/ru/post/155201/
+
+https://tdelegia.ru/linux/mini-rukovodstvo-po-sozdaniyu-makefile-ov-makefile-dlya-samyh/
+
+https://www.gnu.org/software/make/manual/make.html
+
+https://www.gnu.org/software/make/manual/make.pdf

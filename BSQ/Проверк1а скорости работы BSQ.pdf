@@ -1,0 +1,3151 @@
+<!DOCTYPE html>
+<html dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+<meta content='width=device-width, initial-scale=1' name='viewport'/>
+<title>Проверка скорости работы BSQ</title>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+<!-- Chrome, Firefox OS and Opera -->
+<meta content='#58c6d5' name='theme-color'/>
+<!-- Windows Phone -->
+<meta content='#58c6d5' name='msapplication-navbutton-color'/>
+<meta content='blogger' name='generator'/>
+<link href='https://42-21-school.blogspot.com/favicon.ico' rel='icon' type='image/x-icon'/>
+<link href='https://42-21-school.blogspot.com/2019/07/bsq_52.html' rel='canonical'/>
+<link rel="alternate" type="application/atom+xml" title="О школе программирования 21 - Atom" href="https://42-21-school.blogspot.com/feeds/posts/default" />
+<link rel="alternate" type="application/rss+xml" title="О школе программирования 21 - RSS" href="https://42-21-school.blogspot.com/feeds/posts/default?alt=rss" />
+<link rel="service.post" type="application/atom+xml" title="О школе программирования 21 - Atom" href="https://www.blogger.com/feeds/2942439482132220246/posts/default" />
+
+<link rel="alternate" type="application/atom+xml" title="О школе программирования 21 - Atom" href="https://42-21-school.blogspot.com/feeds/2920422285958965093/comments/default" />
+<!--Can't find substitution for tag [blog.ieCssRetrofitLinks]-->
+<meta content='https://42-21-school.blogspot.com/2019/07/bsq_52.html' property='og:url'/>
+<meta content='Проверка скорости работы BSQ' property='og:title'/>
+<meta content='// Чтобы измерить скорость работы вашей программы, добавьте в header main.c  #include &lt;time.h&gt;  #include &lt;stdio.h&gt;  // В начале вашего main(...' property='og:description'/>
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<style type='text/css'>@font-face{font-family:'Cuprum';font-style:normal;font-weight:400;src:local('Cuprum Regular'),local('Cuprum-Regular'),url(//fonts.gstatic.com/s/cuprum/v11/dg4k_pLmvrkcOkBNK-tCt70.woff2)format('woff2');unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Cuprum';font-style:normal;font-weight:400;src:local('Cuprum Regular'),local('Cuprum-Regular'),url(//fonts.gstatic.com/s/cuprum/v11/dg4k_pLmvrkcOkBNIutCt70.woff2)format('woff2');unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Cuprum';font-style:normal;font-weight:400;src:local('Cuprum Regular'),local('Cuprum-Regular'),url(//fonts.gstatic.com/s/cuprum/v11/dg4k_pLmvrkcOkBNKetCt70.woff2)format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Cuprum';font-style:normal;font-weight:400;src:local('Cuprum Regular'),local('Cuprum-Regular'),url(//fonts.gstatic.com/s/cuprum/v11/dg4k_pLmvrkcOkBNKOtCt70.woff2)format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Cuprum';font-style:normal;font-weight:400;src:local('Cuprum Regular'),local('Cuprum-Regular'),url(//fonts.gstatic.com/s/cuprum/v11/dg4k_pLmvrkcOkBNJutC.woff2)format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'PT Sans Narrow';font-style:normal;font-weight:700;src:local('PT Sans Narrow Bold'),local('PTSans-NarrowBold'),url(//fonts.gstatic.com/s/ptsansnarrow/v11/BngSUXNadjH0qYEzV7ab-oWlsbg95AiIW_3QRQ.woff2)format('woff2');unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'PT Sans Narrow';font-style:normal;font-weight:700;src:local('PT Sans Narrow Bold'),local('PTSans-NarrowBold'),url(//fonts.gstatic.com/s/ptsansnarrow/v11/BngSUXNadjH0qYEzV7ab-oWlsbg95AiBW_3QRQ.woff2)format('woff2');unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'PT Sans Narrow';font-style:normal;font-weight:700;src:local('PT Sans Narrow Bold'),local('PTSans-NarrowBold'),url(//fonts.gstatic.com/s/ptsansnarrow/v11/BngSUXNadjH0qYEzV7ab-oWlsbg95AiLW_3QRQ.woff2)format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'PT Sans Narrow';font-style:normal;font-weight:700;src:local('PT Sans Narrow Bold'),local('PTSans-NarrowBold'),url(//fonts.gstatic.com/s/ptsansnarrow/v11/BngSUXNadjH0qYEzV7ab-oWlsbg95AiFW_0.woff2)format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;src:local('Roboto Light Italic'),local('Roboto-LightItalic'),url(//fonts.gstatic.com/s/roboto/v20/KFOjCnqEu92Fr1Mu51TjASc3CsTKlA.woff2)format('woff2');unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;src:local('Roboto Light Italic'),local('Roboto-LightItalic'),url(//fonts.gstatic.com/s/roboto/v20/KFOjCnqEu92Fr1Mu51TjASc-CsTKlA.woff2)format('woff2');unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;src:local('Roboto Light Italic'),local('Roboto-LightItalic'),url(//fonts.gstatic.com/s/roboto/v20/KFOjCnqEu92Fr1Mu51TjASc2CsTKlA.woff2)format('woff2');unicode-range:U+1F00-1FFF;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;src:local('Roboto Light Italic'),local('Roboto-LightItalic'),url(//fonts.gstatic.com/s/roboto/v20/KFOjCnqEu92Fr1Mu51TjASc5CsTKlA.woff2)format('woff2');unicode-range:U+0370-03FF;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;src:local('Roboto Light Italic'),local('Roboto-LightItalic'),url(//fonts.gstatic.com/s/roboto/v20/KFOjCnqEu92Fr1Mu51TjASc1CsTKlA.woff2)format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;src:local('Roboto Light Italic'),local('Roboto-LightItalic'),url(//fonts.gstatic.com/s/roboto/v20/KFOjCnqEu92Fr1Mu51TjASc0CsTKlA.woff2)format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Roboto';font-style:italic;font-weight:300;src:local('Roboto Light Italic'),local('Roboto-LightItalic'),url(//fonts.gstatic.com/s/roboto/v20/KFOjCnqEu92Fr1Mu51TjASc6CsQ.woff2)format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto'),local('Roboto-Regular'),url(//fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu72xKOzY.woff2)format('woff2');unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto'),local('Roboto-Regular'),url(//fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu5mxKOzY.woff2)format('woff2');unicode-range:U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto'),local('Roboto-Regular'),url(//fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu7mxKOzY.woff2)format('woff2');unicode-range:U+1F00-1FFF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto'),local('Roboto-Regular'),url(//fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4WxKOzY.woff2)format('woff2');unicode-range:U+0370-03FF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto'),local('Roboto-Regular'),url(//fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu7WxKOzY.woff2)format('woff2');unicode-range:U+0102-0103,U+0110-0111,U+1EA0-1EF9,U+20AB;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto'),local('Roboto-Regular'),url(//fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu7GxKOzY.woff2)format('woff2');unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto'),local('Roboto-Regular'),url(//fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2)format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}</style>
+<style id='page-skin-1' type='text/css'><!--
+/*! normalize.css v3.0.1 | MIT License | git.io/normalize */html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,progress,video{display:inline-block;vertical-align:baseline}audio:not([controls]){display:none;height:0}[hidden],template{display:none}a{background:transparent}a:active,a:hover{outline:0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}h1{font-size:2em;margin:.67em 0}mark{background:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:1em 40px}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button{height:auto}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:bold}table{border-collapse:collapse;border-spacing:0}td,th{padding:0}
+
+/*!************************************************
+* Blogger Template Style
+* Name: Contempo
+**************************************************/
+body{
+overflow-wrap:break-word;
+word-break:break-word;
+word-wrap:break-word
+}
+.hidden{
+display:none
+}
+.invisible{
+visibility:hidden
+}
+.container::after,.float-container::after{
+clear:both;
+content:'';
+display:table
+}
+.clearboth{
+clear:both
+}
+#comments .comment .comment-actions,.subscribe-popup .FollowByEmail .follow-by-email-submit,.widget.Profile .profile-link,.widget.Profile .profile-link.visit-profile{
+background:0 0;
+border:0;
+box-shadow:none;
+color:#37afc0;
+cursor:pointer;
+font-size:14px;
+font-weight:700;
+outline:0;
+text-decoration:none;
+text-transform:uppercase;
+width:auto
+}
+.dim-overlay{
+background-color:rgba(0,0,0,.54);
+height:100vh;
+left:0;
+position:fixed;
+top:0;
+width:100%
+}
+#sharing-dim-overlay{
+background-color:transparent
+}
+input::-ms-clear{
+display:none
+}
+.blogger-logo,.svg-icon-24.blogger-logo{
+fill:#ff9800;
+opacity:1
+}
+.loading-spinner-large{
+-webkit-animation:mspin-rotate 1.568s infinite linear;
+animation:mspin-rotate 1.568s infinite linear;
+height:48px;
+overflow:hidden;
+position:absolute;
+width:48px;
+z-index:200
+}
+.loading-spinner-large>div{
+-webkit-animation:mspin-revrot 5332ms infinite steps(4);
+animation:mspin-revrot 5332ms infinite steps(4)
+}
+.loading-spinner-large>div>div{
+-webkit-animation:mspin-singlecolor-large-film 1333ms infinite steps(81);
+animation:mspin-singlecolor-large-film 1333ms infinite steps(81);
+background-size:100%;
+height:48px;
+width:3888px
+}
+.mspin-black-large>div>div,.mspin-grey_54-large>div>div{
+background-image:url(https://www.blogblog.com/indie/mspin_black_large.svg)
+}
+.mspin-white-large>div>div{
+background-image:url(https://www.blogblog.com/indie/mspin_white_large.svg)
+}
+.mspin-grey_54-large{
+opacity:.54
+}
+@-webkit-keyframes mspin-singlecolor-large-film{
+from{
+-webkit-transform:translateX(0);
+transform:translateX(0)
+}
+to{
+-webkit-transform:translateX(-3888px);
+transform:translateX(-3888px)
+}
+}
+@keyframes mspin-singlecolor-large-film{
+from{
+-webkit-transform:translateX(0);
+transform:translateX(0)
+}
+to{
+-webkit-transform:translateX(-3888px);
+transform:translateX(-3888px)
+}
+}
+@-webkit-keyframes mspin-rotate{
+from{
+-webkit-transform:rotate(0);
+transform:rotate(0)
+}
+to{
+-webkit-transform:rotate(360deg);
+transform:rotate(360deg)
+}
+}
+@keyframes mspin-rotate{
+from{
+-webkit-transform:rotate(0);
+transform:rotate(0)
+}
+to{
+-webkit-transform:rotate(360deg);
+transform:rotate(360deg)
+}
+}
+@-webkit-keyframes mspin-revrot{
+from{
+-webkit-transform:rotate(0);
+transform:rotate(0)
+}
+to{
+-webkit-transform:rotate(-360deg);
+transform:rotate(-360deg)
+}
+}
+@keyframes mspin-revrot{
+from{
+-webkit-transform:rotate(0);
+transform:rotate(0)
+}
+to{
+-webkit-transform:rotate(-360deg);
+transform:rotate(-360deg)
+}
+}
+.skip-navigation{
+background-color:#fff;
+box-sizing:border-box;
+color:#000;
+display:block;
+height:0;
+left:0;
+line-height:50px;
+overflow:hidden;
+padding-top:0;
+position:fixed;
+text-align:center;
+top:0;
+-webkit-transition:box-shadow .3s,height .3s,padding-top .3s;
+transition:box-shadow .3s,height .3s,padding-top .3s;
+width:100%;
+z-index:900
+}
+.skip-navigation:focus{
+box-shadow:0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12),0 2px 4px -1px rgba(0,0,0,.2);
+height:50px
+}
+#main{
+outline:0
+}
+.main-heading{
+position:absolute;
+clip:rect(1px,1px,1px,1px);
+padding:0;
+border:0;
+height:1px;
+width:1px;
+overflow:hidden
+}
+.Attribution{
+margin-top:1em;
+text-align:center
+}
+.Attribution .blogger img,.Attribution .blogger svg{
+vertical-align:bottom
+}
+.Attribution .blogger img{
+margin-right:.5em
+}
+.Attribution div{
+line-height:24px;
+margin-top:.5em
+}
+.Attribution .copyright,.Attribution .image-attribution{
+font-size:.7em;
+margin-top:1.5em
+}
+.BLOG_mobile_video_class{
+display:none
+}
+.bg-photo{
+background-attachment:scroll!important
+}
+body .CSS_LIGHTBOX{
+z-index:900
+}
+.extendable .show-less,.extendable .show-more{
+border-color:#37afc0;
+color:#37afc0;
+margin-top:8px
+}
+.extendable .show-less.hidden,.extendable .show-more.hidden{
+display:none
+}
+.inline-ad{
+display:none;
+max-width:100%;
+overflow:hidden
+}
+.adsbygoogle{
+display:block
+}
+#cookieChoiceInfo{
+bottom:0;
+top:auto
+}
+iframe.b-hbp-video{
+border:0
+}
+.post-body img{
+max-width:100%
+}
+.post-body iframe{
+max-width:100%
+}
+.post-body a[imageanchor="1"]{
+display:inline-block
+}
+.byline{
+margin-right:1em
+}
+.byline:last-child{
+margin-right:0
+}
+.link-copied-dialog{
+max-width:520px;
+outline:0
+}
+.link-copied-dialog .modal-dialog-buttons{
+margin-top:8px
+}
+.link-copied-dialog .goog-buttonset-default{
+background:0 0;
+border:0
+}
+.link-copied-dialog .goog-buttonset-default:focus{
+outline:0
+}
+.paging-control-container{
+margin-bottom:16px
+}
+.paging-control-container .paging-control{
+display:inline-block
+}
+.paging-control-container .comment-range-text::after,.paging-control-container .paging-control{
+color:#37afc0
+}
+.paging-control-container .comment-range-text,.paging-control-container .paging-control{
+margin-right:8px
+}
+.paging-control-container .comment-range-text::after,.paging-control-container .paging-control::after{
+content:'\00B7';
+cursor:default;
+padding-left:8px;
+pointer-events:none
+}
+.paging-control-container .comment-range-text:last-child::after,.paging-control-container .paging-control:last-child::after{
+content:none
+}
+.byline.reactions iframe{
+height:20px
+}
+.b-notification{
+color:#000;
+background-color:#fff;
+border-bottom:solid 1px #000;
+box-sizing:border-box;
+padding:16px 32px;
+text-align:center
+}
+.b-notification.visible{
+-webkit-transition:margin-top .3s cubic-bezier(.4,0,.2,1);
+transition:margin-top .3s cubic-bezier(.4,0,.2,1)
+}
+.b-notification.invisible{
+position:absolute
+}
+.b-notification-close{
+position:absolute;
+right:8px;
+top:8px
+}
+.no-posts-message{
+line-height:40px;
+text-align:center
+}
+@media screen and (max-width:800px){
+body.item-view .post-body a[imageanchor="1"][style*="float: left;"],body.item-view .post-body a[imageanchor="1"][style*="float: right;"]{
+float:none!important;
+clear:none!important
+}
+body.item-view .post-body a[imageanchor="1"] img{
+display:block;
+height:auto;
+margin:0 auto
+}
+body.item-view .post-body>.separator:first-child>a[imageanchor="1"]:first-child{
+margin-top:20px
+}
+.post-body a[imageanchor]{
+display:block
+}
+body.item-view .post-body a[imageanchor="1"]{
+margin-left:0!important;
+margin-right:0!important
+}
+body.item-view .post-body a[imageanchor="1"]+a[imageanchor="1"]{
+margin-top:16px
+}
+}
+.item-control{
+display:none
+}
+#comments{
+border-top:1px dashed rgba(0,0,0,.54);
+margin-top:20px;
+padding:20px
+}
+#comments .comment-thread ol{
+margin:0;
+padding-left:0;
+padding-left:0
+}
+#comments .comment .comment-replybox-single,#comments .comment-thread .comment-replies{
+margin-left:60px
+}
+#comments .comment-thread .thread-count{
+display:none
+}
+#comments .comment{
+list-style-type:none;
+padding:0 0 30px;
+position:relative
+}
+#comments .comment .comment{
+padding-bottom:8px
+}
+.comment .avatar-image-container{
+position:absolute
+}
+.comment .avatar-image-container img{
+border-radius:50%
+}
+.avatar-image-container svg,.comment .avatar-image-container .avatar-icon{
+border-radius:50%;
+border:solid 1px #707070;
+box-sizing:border-box;
+fill:#707070;
+height:35px;
+margin:0;
+padding:7px;
+width:35px
+}
+.comment .comment-block{
+margin-top:10px;
+margin-left:60px;
+padding-bottom:0
+}
+#comments .comment-author-header-wrapper{
+margin-left:40px
+}
+#comments .comment .thread-expanded .comment-block{
+padding-bottom:20px
+}
+#comments .comment .comment-header .user,#comments .comment .comment-header .user a{
+color:#37737d;
+font-style:normal;
+font-weight:700
+}
+#comments .comment .comment-actions{
+bottom:0;
+margin-bottom:15px;
+position:absolute
+}
+#comments .comment .comment-actions>*{
+margin-right:8px
+}
+#comments .comment .comment-header .datetime{
+bottom:0;
+color:rgba(55,115,125,.54);
+display:inline-block;
+font-size:13px;
+font-style:italic;
+margin-left:8px
+}
+#comments .comment .comment-footer .comment-timestamp a,#comments .comment .comment-header .datetime a{
+color:rgba(55,115,125,.54)
+}
+#comments .comment .comment-content,.comment .comment-body{
+margin-top:12px;
+word-break:break-word
+}
+.comment-body{
+margin-bottom:12px
+}
+#comments.embed[data-num-comments="0"]{
+border:0;
+margin-top:0;
+padding-top:0
+}
+#comments.embed[data-num-comments="0"] #comment-post-message,#comments.embed[data-num-comments="0"] div.comment-form>p,#comments.embed[data-num-comments="0"] p.comment-footer{
+display:none
+}
+#comment-editor-src{
+display:none
+}
+.comments .comments-content .loadmore.loaded{
+max-height:0;
+opacity:0;
+overflow:hidden
+}
+.extendable .remaining-items{
+height:0;
+overflow:hidden;
+-webkit-transition:height .3s cubic-bezier(.4,0,.2,1);
+transition:height .3s cubic-bezier(.4,0,.2,1)
+}
+.extendable .remaining-items.expanded{
+height:auto
+}
+.svg-icon-24,.svg-icon-24-button{
+cursor:pointer;
+height:24px;
+width:24px;
+min-width:24px
+}
+.touch-icon{
+margin:-12px;
+padding:12px
+}
+.touch-icon:active,.touch-icon:focus{
+background-color:rgba(153,153,153,.4);
+border-radius:50%
+}
+svg:not(:root).touch-icon{
+overflow:visible
+}
+html[dir=rtl] .rtl-reversible-icon{
+-webkit-transform:scaleX(-1);
+-ms-transform:scaleX(-1);
+transform:scaleX(-1)
+}
+.svg-icon-24-button,.touch-icon-button{
+background:0 0;
+border:0;
+margin:0;
+outline:0;
+padding:0
+}
+.touch-icon-button .touch-icon:active,.touch-icon-button .touch-icon:focus{
+background-color:transparent
+}
+.touch-icon-button:active .touch-icon,.touch-icon-button:focus .touch-icon{
+background-color:rgba(153,153,153,.4);
+border-radius:50%
+}
+.Profile .default-avatar-wrapper .avatar-icon{
+border-radius:50%;
+border:solid 1px #707070;
+box-sizing:border-box;
+fill:#707070;
+margin:0
+}
+.Profile .individual .default-avatar-wrapper .avatar-icon{
+padding:25px
+}
+.Profile .individual .avatar-icon,.Profile .individual .profile-img{
+height:120px;
+width:120px
+}
+.Profile .team .default-avatar-wrapper .avatar-icon{
+padding:8px
+}
+.Profile .team .avatar-icon,.Profile .team .default-avatar-wrapper,.Profile .team .profile-img{
+height:40px;
+width:40px
+}
+.snippet-container{
+margin:0;
+position:relative;
+overflow:hidden
+}
+.snippet-fade{
+bottom:0;
+box-sizing:border-box;
+position:absolute;
+width:96px
+}
+.snippet-fade{
+right:0
+}
+.snippet-fade:after{
+content:'\2026'
+}
+.snippet-fade:after{
+float:right
+}
+.post-bottom{
+-webkit-box-align:center;
+-webkit-align-items:center;
+-ms-flex-align:center;
+align-items:center;
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-flex-wrap:wrap;
+-ms-flex-wrap:wrap;
+flex-wrap:wrap
+}
+.post-footer{
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto;
+-webkit-flex-wrap:wrap;
+-ms-flex-wrap:wrap;
+flex-wrap:wrap;
+-webkit-box-ordinal-group:2;
+-webkit-order:1;
+-ms-flex-order:1;
+order:1
+}
+.post-footer>*{
+-webkit-box-flex:0;
+-webkit-flex:0 1 auto;
+-ms-flex:0 1 auto;
+flex:0 1 auto
+}
+.post-footer .byline:last-child{
+margin-right:1em
+}
+.jump-link{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto;
+-webkit-box-ordinal-group:3;
+-webkit-order:2;
+-ms-flex-order:2;
+order:2
+}
+.centered-top-container.sticky{
+left:0;
+position:fixed;
+right:0;
+top:0;
+width:auto;
+z-index:50;
+-webkit-transition-property:opacity,-webkit-transform;
+transition-property:opacity,-webkit-transform;
+transition-property:transform,opacity;
+transition-property:transform,opacity,-webkit-transform;
+-webkit-transition-duration:.2s;
+transition-duration:.2s;
+-webkit-transition-timing-function:cubic-bezier(.4,0,.2,1);
+transition-timing-function:cubic-bezier(.4,0,.2,1)
+}
+.centered-top-placeholder{
+display:none
+}
+.collapsed-header .centered-top-placeholder{
+display:block
+}
+.centered-top-container .Header .replaced h1,.centered-top-placeholder .Header .replaced h1{
+display:none
+}
+.centered-top-container.sticky .Header .replaced h1{
+display:block
+}
+.centered-top-container.sticky .Header .header-widget{
+background:0 0
+}
+.centered-top-container.sticky .Header .header-image-wrapper{
+display:none
+}
+.centered-top-container img,.centered-top-placeholder img{
+max-width:100%
+}
+.collapsible{
+-webkit-transition:height .3s cubic-bezier(.4,0,.2,1);
+transition:height .3s cubic-bezier(.4,0,.2,1)
+}
+.collapsible,.collapsible>summary{
+display:block;
+overflow:hidden
+}
+.collapsible>:not(summary){
+display:none
+}
+.collapsible[open]>:not(summary){
+display:block
+}
+.collapsible:focus,.collapsible>summary:focus{
+outline:0
+}
+.collapsible>summary{
+cursor:pointer;
+display:block;
+padding:0
+}
+.collapsible:focus>summary,.collapsible>summary:focus{
+background-color:transparent
+}
+.collapsible>summary::-webkit-details-marker{
+display:none
+}
+.collapsible-title{
+-webkit-box-align:center;
+-webkit-align-items:center;
+-ms-flex-align:center;
+align-items:center;
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex
+}
+.collapsible-title .title{
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto;
+-webkit-box-ordinal-group:1;
+-webkit-order:0;
+-ms-flex-order:0;
+order:0;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap
+}
+.collapsible-title .chevron-down,.collapsible[open] .collapsible-title .chevron-up{
+display:block
+}
+.collapsible-title .chevron-up,.collapsible[open] .collapsible-title .chevron-down{
+display:none
+}
+.flat-button{
+cursor:pointer;
+display:inline-block;
+font-weight:700;
+text-transform:uppercase;
+border-radius:2px;
+padding:8px;
+margin:-8px
+}
+.flat-icon-button{
+background:0 0;
+border:0;
+margin:0;
+outline:0;
+padding:0;
+margin:-12px;
+padding:12px;
+cursor:pointer;
+box-sizing:content-box;
+display:inline-block;
+line-height:0
+}
+.flat-icon-button,.flat-icon-button .splash-wrapper{
+border-radius:50%
+}
+.flat-icon-button .splash.animate{
+-webkit-animation-duration:.3s;
+animation-duration:.3s
+}
+.overflowable-container{
+max-height:46px;
+overflow:hidden;
+position:relative
+}
+.overflow-button{
+cursor:pointer
+}
+#overflowable-dim-overlay{
+background:0 0
+}
+.overflow-popup{
+box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+background-color:#f3fdfe;
+left:0;
+max-width:calc(100% - 32px);
+position:absolute;
+top:0;
+visibility:hidden;
+z-index:101
+}
+.overflow-popup ul{
+list-style:none
+}
+.overflow-popup .tabs li,.overflow-popup li{
+display:block;
+height:auto
+}
+.overflow-popup .tabs li{
+padding-left:0;
+padding-right:0
+}
+.overflow-button.hidden,.overflow-popup .tabs li.hidden,.overflow-popup li.hidden{
+display:none
+}
+.pill-button{
+background:0 0;
+border:1px solid;
+border-radius:12px;
+cursor:pointer;
+display:inline-block;
+padding:4px 16px;
+text-transform:uppercase
+}
+.ripple{
+position:relative
+}
+.ripple>*{
+z-index:1
+}
+.splash-wrapper{
+bottom:0;
+left:0;
+overflow:hidden;
+pointer-events:none;
+position:absolute;
+right:0;
+top:0;
+z-index:0
+}
+.splash{
+background:#ccc;
+border-radius:100%;
+display:block;
+opacity:.6;
+position:absolute;
+-webkit-transform:scale(0);
+-ms-transform:scale(0);
+transform:scale(0)
+}
+.splash.animate{
+-webkit-animation:ripple-effect .4s linear;
+animation:ripple-effect .4s linear
+}
+@-webkit-keyframes ripple-effect{
+100%{
+opacity:0;
+-webkit-transform:scale(2.5);
+transform:scale(2.5)
+}
+}
+@keyframes ripple-effect{
+100%{
+opacity:0;
+-webkit-transform:scale(2.5);
+transform:scale(2.5)
+}
+}
+.search{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+line-height:24px;
+width:24px
+}
+.search.focused{
+width:100%
+}
+.search.focused .section{
+width:100%
+}
+.search form{
+z-index:101
+}
+.search h3{
+display:none
+}
+.search form{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-flex:1;
+-webkit-flex:1 0 0;
+-ms-flex:1 0 0px;
+flex:1 0 0;
+border-bottom:solid 1px transparent;
+padding-bottom:8px
+}
+.search form>*{
+display:none
+}
+.search.focused form>*{
+display:block
+}
+.search .search-input label{
+display:none
+}
+.centered-top-placeholder.cloned .search form{
+z-index:30
+}
+.search.focused form{
+border-color:#ffffff;
+position:relative;
+width:auto
+}
+.collapsed-header .centered-top-container .search.focused form{
+border-bottom-color:transparent
+}
+.search-expand{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto
+}
+.search-expand-text{
+display:none
+}
+.search-close{
+display:inline;
+vertical-align:middle
+}
+.search-input{
+-webkit-box-flex:1;
+-webkit-flex:1 0 1px;
+-ms-flex:1 0 1px;
+flex:1 0 1px
+}
+.search-input input{
+background:0 0;
+border:0;
+box-sizing:border-box;
+color:#ffffff;
+display:inline-block;
+outline:0;
+width:calc(100% - 48px)
+}
+.search-input input.no-cursor{
+color:transparent;
+text-shadow:0 0 0 #ffffff
+}
+.collapsed-header .centered-top-container .search-action,.collapsed-header .centered-top-container .search-input input{
+color:#37737d
+}
+.collapsed-header .centered-top-container .search-input input.no-cursor{
+color:transparent;
+text-shadow:0 0 0 #37737d
+}
+.collapsed-header .centered-top-container .search-input input.no-cursor:focus,.search-input input.no-cursor:focus{
+outline:0
+}
+.search-focused>*{
+visibility:hidden
+}
+.search-focused .search,.search-focused .search-icon{
+visibility:visible
+}
+.search.focused .search-action{
+display:block
+}
+.search.focused .search-action:disabled{
+opacity:.3
+}
+.widget.Sharing .sharing-button{
+display:none
+}
+.widget.Sharing .sharing-buttons li{
+padding:0
+}
+.widget.Sharing .sharing-buttons li span{
+display:none
+}
+.post-share-buttons{
+position:relative
+}
+.centered-bottom .share-buttons .svg-icon-24,.share-buttons .svg-icon-24{
+fill:#707070
+}
+.sharing-open.touch-icon-button:active .touch-icon,.sharing-open.touch-icon-button:focus .touch-icon{
+background-color:transparent
+}
+.share-buttons{
+background-color:#f3fdfe;
+border-radius:2px;
+box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+color:#212121;
+list-style:none;
+margin:0;
+padding:8px 0;
+position:absolute;
+top:-11px;
+min-width:200px;
+z-index:101
+}
+.share-buttons.hidden{
+display:none
+}
+.sharing-button{
+background:0 0;
+border:0;
+margin:0;
+outline:0;
+padding:0;
+cursor:pointer
+}
+.share-buttons li{
+margin:0;
+height:48px
+}
+.share-buttons li:last-child{
+margin-bottom:0
+}
+.share-buttons li .sharing-platform-button{
+box-sizing:border-box;
+cursor:pointer;
+display:block;
+height:100%;
+margin-bottom:0;
+padding:0 16px;
+position:relative;
+width:100%
+}
+.share-buttons li .sharing-platform-button:focus,.share-buttons li .sharing-platform-button:hover{
+background-color:rgba(128,128,128,.1);
+outline:0
+}
+.share-buttons li svg[class*=" sharing-"],.share-buttons li svg[class^=sharing-]{
+position:absolute;
+top:10px
+}
+.share-buttons li span.sharing-platform-button{
+position:relative;
+top:0
+}
+.share-buttons li .platform-sharing-text{
+display:block;
+font-size:16px;
+line-height:48px;
+white-space:nowrap
+}
+.share-buttons li .platform-sharing-text{
+margin-left:56px
+}
+.sidebar-container{
+background-color:#f3fdfe;
+max-width:284px;
+overflow-y:auto;
+-webkit-transition-property:-webkit-transform;
+transition-property:-webkit-transform;
+transition-property:transform;
+transition-property:transform,-webkit-transform;
+-webkit-transition-duration:.3s;
+transition-duration:.3s;
+-webkit-transition-timing-function:cubic-bezier(0,0,.2,1);
+transition-timing-function:cubic-bezier(0,0,.2,1);
+width:284px;
+z-index:101;
+-webkit-overflow-scrolling:touch
+}
+.sidebar-container .navigation{
+line-height:0;
+padding:16px
+}
+.sidebar-container .sidebar-back{
+cursor:pointer
+}
+.sidebar-container .widget{
+background:0 0;
+margin:0 16px;
+padding:16px 0
+}
+.sidebar-container .widget .title{
+color:#212121;
+margin:0
+}
+.sidebar-container .widget ul{
+list-style:none;
+margin:0;
+padding:0
+}
+.sidebar-container .widget ul ul{
+margin-left:1em
+}
+.sidebar-container .widget li{
+font-size:16px;
+line-height:normal
+}
+.sidebar-container .widget+.widget{
+border-top:1px dashed #cccccc
+}
+.BlogArchive li{
+margin:16px 0
+}
+.BlogArchive li:last-child{
+margin-bottom:0
+}
+.Label li a{
+display:inline-block
+}
+.BlogArchive .post-count,.Label .label-count{
+float:right;
+margin-left:.25em
+}
+.BlogArchive .post-count::before,.Label .label-count::before{
+content:'('
+}
+.BlogArchive .post-count::after,.Label .label-count::after{
+content:')'
+}
+.widget.Translate .skiptranslate>div{
+display:block!important
+}
+.widget.Profile .profile-link{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex
+}
+.widget.Profile .team-member .default-avatar-wrapper,.widget.Profile .team-member .profile-img{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto;
+margin-right:1em
+}
+.widget.Profile .individual .profile-link{
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+-webkit-flex-direction:column;
+-ms-flex-direction:column;
+flex-direction:column
+}
+.widget.Profile .team .profile-link .profile-name{
+-webkit-align-self:center;
+-ms-flex-item-align:center;
+-ms-grid-row-align:center;
+align-self:center;
+display:block;
+-webkit-box-flex:1;
+-webkit-flex:1 1 auto;
+-ms-flex:1 1 auto;
+flex:1 1 auto
+}
+.dim-overlay{
+background-color:rgba(0,0,0,.54);
+z-index:100
+}
+body.sidebar-visible{
+overflow-y:hidden
+}
+@media screen and (max-width:1439px){
+.sidebar-container{
+bottom:0;
+position:fixed;
+top:0;
+left:0;
+right:auto
+}
+.sidebar-container.sidebar-invisible{
+-webkit-transition-timing-function:cubic-bezier(.4,0,.6,1);
+transition-timing-function:cubic-bezier(.4,0,.6,1);
+-webkit-transform:translateX(-284px);
+-ms-transform:translateX(-284px);
+transform:translateX(-284px)
+}
+}
+@media screen and (min-width:1440px){
+.sidebar-container{
+position:absolute;
+top:0;
+left:0;
+right:auto
+}
+.sidebar-container .navigation{
+display:none
+}
+}
+.dialog{
+box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+background:#f3fdfe;
+box-sizing:border-box;
+color:#757575;
+padding:30px;
+position:fixed;
+text-align:center;
+width:calc(100% - 24px);
+z-index:101
+}
+.dialog input[type=email],.dialog input[type=text]{
+background-color:transparent;
+border:0;
+border-bottom:solid 1px rgba(117,117,117,.12);
+color:#757575;
+display:block;
+font-family:Roboto;
+font-size:16px;
+line-height:24px;
+margin:auto;
+padding-bottom:7px;
+outline:0;
+text-align:center;
+width:100%
+}
+.dialog input[type=email]::-webkit-input-placeholder,.dialog input[type=text]::-webkit-input-placeholder{
+color:#757575
+}
+.dialog input[type=email]::-moz-placeholder,.dialog input[type=text]::-moz-placeholder{
+color:#757575
+}
+.dialog input[type=email]:-ms-input-placeholder,.dialog input[type=text]:-ms-input-placeholder{
+color:#757575
+}
+.dialog input[type=email]::placeholder,.dialog input[type=text]::placeholder{
+color:#757575
+}
+.dialog input[type=email]:focus,.dialog input[type=text]:focus{
+border-bottom:solid 2px #37afc0;
+padding-bottom:6px
+}
+.dialog input.no-cursor{
+color:transparent;
+text-shadow:0 0 0 #757575
+}
+.dialog input.no-cursor:focus{
+outline:0
+}
+.dialog input.no-cursor:focus{
+outline:0
+}
+.dialog input[type=submit]{
+font-family:Roboto
+}
+.dialog .goog-buttonset-default{
+color:#37afc0
+}
+.subscribe-popup{
+max-width:364px
+}
+.subscribe-popup h3{
+color:#37737d;
+font-size:1.8em;
+margin-top:0
+}
+.subscribe-popup .FollowByEmail h3{
+display:none
+}
+.subscribe-popup .FollowByEmail .follow-by-email-submit{
+color:#37afc0;
+display:inline-block;
+margin:0 auto;
+margin-top:24px;
+width:auto;
+white-space:normal
+}
+.subscribe-popup .FollowByEmail .follow-by-email-submit:disabled{
+cursor:default;
+opacity:.3
+}
+@media (max-width:800px){
+.blog-name div.widget.Subscribe{
+margin-bottom:16px
+}
+body.item-view .blog-name div.widget.Subscribe{
+margin:8px auto 16px auto;
+width:100%
+}
+}
+.tabs{
+list-style:none
+}
+.tabs li{
+display:inline-block
+}
+.tabs li a{
+cursor:pointer;
+display:inline-block;
+font-weight:700;
+text-transform:uppercase;
+padding:12px 8px
+}
+.tabs .selected{
+border-bottom:4px solid #ffffff
+}
+.tabs .selected a{
+color:#ffffff
+}
+body#layout .bg-photo,body#layout .bg-photo-overlay{
+display:none
+}
+body#layout .page_body{
+padding:0;
+position:relative;
+top:0
+}
+body#layout .page{
+display:inline-block;
+left:inherit;
+position:relative;
+vertical-align:top;
+width:540px
+}
+body#layout .centered{
+max-width:954px
+}
+body#layout .navigation{
+display:none
+}
+body#layout .sidebar-container{
+display:inline-block;
+width:40%
+}
+body#layout .hamburger-menu,body#layout .search{
+display:none
+}
+.centered-top-container .svg-icon-24,body.collapsed-header .centered-top-placeholder .svg-icon-24{
+fill:#ffffff
+}
+.sidebar-container .svg-icon-24{
+fill:#707070
+}
+.centered-bottom .svg-icon-24,body.collapsed-header .centered-top-container .svg-icon-24{
+fill:#707070
+}
+.centered-bottom .share-buttons .svg-icon-24,.share-buttons .svg-icon-24{
+fill:#707070
+}
+body{
+background-color:#58c6d5;
+color:#757575;
+font:normal normal 15px Roboto;
+margin:0;
+min-height:100vh
+}
+img{
+max-width:100%
+}
+h3{
+color:#757575;
+font-size:16px
+}
+a{
+text-decoration:none;
+color:#37afc0
+}
+a:visited{
+color:#37afc0
+}
+a:hover{
+color:#37afc0
+}
+blockquote{
+color:#212121;
+font:italic 300 15px Roboto, sans-serif;
+font-size:x-large;
+text-align:center
+}
+.pill-button{
+font-size:12px
+}
+.bg-photo-container{
+height:480px;
+overflow:hidden;
+position:absolute;
+width:100%;
+z-index:1
+}
+.bg-photo{
+background:#58c6d5 url(https://themes.googleusercontent.com/image?id=iOjEWmpWlNVmx91RAaWC3irZSyq8cu05pASFz84khXxbIM83x8QP6Hnw7ZIDcZFvcAGSBpGCNsBC) no-repeat scroll top center /* Credit: Galeries (http://www.offset.com/photos/291882) */;;
+background-attachment:scroll;
+background-size:cover;
+-webkit-filter:blur(0px);
+filter:blur(0px);
+height:calc(100% + 2 * 0px);
+left:0px;
+position:absolute;
+top:0px;
+width:calc(100% + 2 * 0px)
+}
+.bg-photo-overlay{
+background:rgba(0,0,0,.26);
+background-size:cover;
+height:480px;
+position:absolute;
+width:100%;
+z-index:2
+}
+.hamburger-menu{
+float:left;
+margin-top:0
+}
+.sticky .hamburger-menu{
+float:none;
+position:absolute
+}
+.search{
+border-bottom:solid 1px rgba(255, 255, 255, 0);
+float:right;
+position:relative;
+-webkit-transition-property:width;
+transition-property:width;
+-webkit-transition-duration:.5s;
+transition-duration:.5s;
+-webkit-transition-timing-function:cubic-bezier(.4,0,.2,1);
+transition-timing-function:cubic-bezier(.4,0,.2,1);
+z-index:101
+}
+.search .dim-overlay{
+background-color:transparent
+}
+.search form{
+height:36px;
+-webkit-transition-property:border-color;
+transition-property:border-color;
+-webkit-transition-delay:.5s;
+transition-delay:.5s;
+-webkit-transition-duration:.2s;
+transition-duration:.2s;
+-webkit-transition-timing-function:cubic-bezier(.4,0,.2,1);
+transition-timing-function:cubic-bezier(.4,0,.2,1)
+}
+.search.focused{
+width:calc(100% - 48px)
+}
+.search.focused form{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-flex:1;
+-webkit-flex:1 0 1px;
+-ms-flex:1 0 1px;
+flex:1 0 1px;
+border-color:#ffffff;
+margin-left:-24px;
+padding-left:36px;
+position:relative;
+width:auto
+}
+.item-view .search,.sticky .search{
+right:0;
+float:none;
+margin-left:0;
+position:absolute
+}
+.item-view .search.focused,.sticky .search.focused{
+width:calc(100% - 50px)
+}
+.item-view .search.focused form,.sticky .search.focused form{
+border-bottom-color:#757575
+}
+.centered-top-placeholder.cloned .search form{
+z-index:30
+}
+.search_button{
+-webkit-box-flex:0;
+-webkit-flex:0 0 24px;
+-ms-flex:0 0 24px;
+flex:0 0 24px;
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+-webkit-flex-direction:column;
+-ms-flex-direction:column;
+flex-direction:column
+}
+.search_button svg{
+margin-top:0
+}
+.search-input{
+height:48px
+}
+.search-input input{
+display:block;
+color:#ffffff;
+font:16px Roboto, sans-serif;
+height:48px;
+line-height:48px;
+padding:0;
+width:100%
+}
+.search-input input::-webkit-input-placeholder{
+color:#ffffff;
+opacity:.3
+}
+.search-input input::-moz-placeholder{
+color:#ffffff;
+opacity:.3
+}
+.search-input input:-ms-input-placeholder{
+color:#ffffff;
+opacity:.3
+}
+.search-input input::placeholder{
+color:#ffffff;
+opacity:.3
+}
+.search-action{
+background:0 0;
+border:0;
+color:#ffffff;
+cursor:pointer;
+display:none;
+height:48px;
+margin-top:0
+}
+.sticky .search-action{
+color:#757575
+}
+.search.focused .search-action{
+display:block
+}
+.search.focused .search-action:disabled{
+opacity:.3
+}
+.page_body{
+position:relative;
+z-index:20
+}
+.page_body .widget{
+margin-bottom:16px
+}
+.page_body .centered{
+box-sizing:border-box;
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-box-orient:vertical;
+-webkit-box-direction:normal;
+-webkit-flex-direction:column;
+-ms-flex-direction:column;
+flex-direction:column;
+margin:0 auto;
+max-width:922px;
+min-height:100vh;
+padding:24px 0
+}
+.page_body .centered>*{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto
+}
+.page_body .centered>#footer{
+margin-top:auto
+}
+.blog-name{
+margin:24px 0 16px 0
+}
+.item-view .blog-name,.sticky .blog-name{
+box-sizing:border-box;
+margin-left:36px;
+min-height:48px;
+opacity:1;
+padding-top:12px
+}
+.blog-name .subscribe-section-container{
+margin-bottom:32px;
+text-align:center;
+-webkit-transition-property:opacity;
+transition-property:opacity;
+-webkit-transition-duration:.5s;
+transition-duration:.5s
+}
+.item-view .blog-name .subscribe-section-container,.sticky .blog-name .subscribe-section-container{
+margin:0 0 8px 0
+}
+.blog-name .PageList{
+margin-top:16px;
+padding-top:8px;
+text-align:center
+}
+.blog-name .PageList .overflowable-contents{
+width:100%
+}
+.blog-name .PageList h3.title{
+color:#ffffff;
+margin:8px auto;
+text-align:center;
+width:100%
+}
+.centered-top-container .blog-name{
+-webkit-transition-property:opacity;
+transition-property:opacity;
+-webkit-transition-duration:.5s;
+transition-duration:.5s
+}
+.item-view .return_link{
+margin-bottom:12px;
+margin-top:12px;
+position:absolute
+}
+.item-view .blog-name{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+-webkit-flex-wrap:wrap;
+-ms-flex-wrap:wrap;
+flex-wrap:wrap;
+margin:0 48px 27px 48px
+}
+.item-view .subscribe-section-container{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto
+}
+.item-view #header,.item-view .Header{
+margin-bottom:5px;
+margin-right:15px
+}
+.item-view .sticky .Header{
+margin-bottom:0
+}
+.item-view .Header p{
+margin:10px 0 0 0;
+text-align:left
+}
+.item-view .post-share-buttons-bottom{
+margin-right:16px
+}
+.sticky{
+background:#f3fdfe;
+box-shadow:0 0 20px 0 rgba(0,0,0,.7);
+box-sizing:border-box;
+margin-left:0
+}
+.sticky #header{
+margin-bottom:8px;
+margin-right:8px
+}
+.sticky .centered-top{
+margin:4px auto;
+max-width:890px;
+min-height:48px
+}
+.sticky .blog-name{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+margin:0 48px
+}
+.sticky .blog-name #header{
+-webkit-box-flex:0;
+-webkit-flex:0 1 auto;
+-ms-flex:0 1 auto;
+flex:0 1 auto;
+-webkit-box-ordinal-group:2;
+-webkit-order:1;
+-ms-flex-order:1;
+order:1;
+overflow:hidden
+}
+.sticky .blog-name .subscribe-section-container{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto;
+-webkit-box-ordinal-group:3;
+-webkit-order:2;
+-ms-flex-order:2;
+order:2
+}
+.sticky .Header h1{
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+margin-right:-10px;
+margin-bottom:-10px;
+padding-right:10px;
+padding-bottom:10px
+}
+.sticky .Header p{
+display:none
+}
+.sticky .PageList{
+display:none
+}
+.search-focused>*{
+visibility:visible
+}
+.search-focused .hamburger-menu{
+visibility:visible
+}
+.item-view .search-focused .blog-name,.sticky .search-focused .blog-name{
+opacity:0
+}
+.centered-bottom,.centered-top-container,.centered-top-placeholder{
+padding:0 16px
+}
+.centered-top{
+position:relative
+}
+.item-view .centered-top.search-focused .subscribe-section-container,.sticky .centered-top.search-focused .subscribe-section-container{
+opacity:0
+}
+.page_body.has-vertical-ads .centered .centered-bottom{
+display:inline-block;
+width:calc(100% - 176px)
+}
+.Header h1{
+color:#ffffff;
+font:normal bold 75px PT Sans Narrow;
+line-height:normal;
+margin:0 0 13px 0;
+text-align:center;
+width:100%
+}
+.Header h1 a,.Header h1 a:hover,.Header h1 a:visited{
+color:#ffffff
+}
+.item-view .Header h1,.sticky .Header h1{
+font-size:24px;
+line-height:24px;
+margin:0;
+text-align:left
+}
+.sticky .Header h1{
+color:#757575
+}
+.sticky .Header h1 a,.sticky .Header h1 a:hover,.sticky .Header h1 a:visited{
+color:#757575
+}
+.Header p{
+color:#ffffff;
+margin:0 0 13px 0;
+opacity:.8;
+text-align:center
+}
+.widget .title{
+line-height:28px
+}
+.BlogArchive li{
+font-size:16px
+}
+.BlogArchive .post-count{
+color:#757575
+}
+#page_body .FeaturedPost,.Blog .blog-posts .post-outer-container{
+background:#f3fdfe;
+min-height:40px;
+padding:30px 40px;
+width:auto
+}
+.Blog .blog-posts .post-outer-container:last-child{
+margin-bottom:0
+}
+.Blog .blog-posts .post-outer-container .post-outer{
+border:0;
+position:relative;
+padding-bottom:.25em
+}
+.post-outer-container{
+margin-bottom:16px
+}
+.post:first-child{
+margin-top:0
+}
+.post .thumb{
+float:left;
+height:20%;
+width:20%
+}
+.post-share-buttons-bottom,.post-share-buttons-top{
+float:right
+}
+.post-share-buttons-bottom{
+margin-right:24px
+}
+.post-footer,.post-header{
+clear:left;
+color:rgba(0, 0, 0, 0.54);
+margin:0;
+width:inherit
+}
+.blog-pager{
+text-align:center
+}
+.blog-pager a{
+color:#37afc0
+}
+.blog-pager a:visited{
+color:#37afc0
+}
+.blog-pager a:hover{
+color:#37afc0
+}
+.post-title{
+font:normal normal 36px Cuprum;
+float:left;
+margin:0 0 8px 0;
+max-width:calc(100% - 48px)
+}
+.post-title a{
+font:normal normal 36px Cuprum
+}
+.post-title,.post-title a,.post-title a:hover,.post-title a:visited{
+color:#37737d
+}
+.post-body{
+color:#757575;
+font:normal normal 15px Roboto;
+line-height:1.6em;
+margin:1.5em 0 2em 0;
+display:block
+}
+.post-body img{
+height:inherit
+}
+.post-body .snippet-thumbnail{
+float:left;
+margin:0;
+margin-right:2em;
+max-height:128px;
+max-width:128px
+}
+.post-body .snippet-thumbnail img{
+max-width:100%
+}
+.main .FeaturedPost .widget-content{
+border:0;
+position:relative;
+padding-bottom:.25em
+}
+.FeaturedPost img{
+margin-top:2em
+}
+.FeaturedPost .snippet-container{
+margin:2em 0
+}
+.FeaturedPost .snippet-container p{
+margin:0
+}
+.FeaturedPost .snippet-thumbnail{
+float:none;
+height:auto;
+margin-bottom:2em;
+margin-right:0;
+overflow:hidden;
+max-height:calc(600px + 2em);
+max-width:100%;
+text-align:center;
+width:100%
+}
+.FeaturedPost .snippet-thumbnail img{
+max-width:100%;
+width:100%
+}
+.byline{
+color:rgba(0, 0, 0, 0.54);
+display:inline-block;
+line-height:24px;
+margin-top:8px;
+vertical-align:top
+}
+.byline.post-author:first-child{
+margin-right:0
+}
+.byline.reactions .reactions-label{
+line-height:22px;
+vertical-align:top
+}
+.byline.post-share-buttons{
+position:relative;
+display:inline-block;
+margin-top:0;
+width:100%
+}
+.byline.post-share-buttons .sharing{
+float:right
+}
+.flat-button.ripple:hover{
+background-color:rgba(55,175,192,.12)
+}
+.flat-button.ripple .splash{
+background-color:rgba(55,175,192,.4)
+}
+a.timestamp-link,a:active.timestamp-link,a:visited.timestamp-link{
+color:inherit;
+font:inherit;
+text-decoration:inherit
+}
+.post-share-buttons{
+margin-left:0
+}
+.clear-sharing{
+min-height:24px
+}
+.comment-link{
+color:#37afc0;
+position:relative
+}
+.comment-link .num_comments{
+margin-left:8px;
+vertical-align:top
+}
+#comment-holder .continue{
+display:none
+}
+#comment-editor{
+margin-bottom:20px;
+margin-top:20px
+}
+#comments .comment-form h4,#comments h3.title{
+position:absolute;
+clip:rect(1px,1px,1px,1px);
+padding:0;
+border:0;
+height:1px;
+width:1px;
+overflow:hidden
+}
+.post-filter-message{
+background-color:rgba(0,0,0,.7);
+color:#fff;
+display:table;
+margin-bottom:16px;
+width:100%
+}
+.post-filter-message div{
+display:table-cell;
+padding:15px 28px
+}
+.post-filter-message div:last-child{
+padding-left:0;
+text-align:right
+}
+.post-filter-message a{
+white-space:nowrap
+}
+.post-filter-message .search-label,.post-filter-message .search-query{
+font-weight:700;
+color:#37afc0
+}
+#blog-pager{
+margin:2em 0
+}
+#blog-pager a{
+color:#ffffff;
+font-size:14px
+}
+.subscribe-button{
+border-color:#ffffff;
+color:#ffffff
+}
+.sticky .subscribe-button{
+border-color:#757575;
+color:#757575
+}
+.tabs{
+margin:0 auto;
+padding:0
+}
+.tabs li{
+margin:0 8px;
+vertical-align:top
+}
+.tabs .overflow-button a,.tabs li a{
+color:#b8babb;
+font:700 normal 15px Roboto, sans-serif;
+line-height:18px
+}
+.tabs .overflow-button a{
+padding:12px 8px
+}
+.overflow-popup .tabs li{
+text-align:left
+}
+.overflow-popup li a{
+color:#757575;
+display:block;
+padding:8px 20px
+}
+.overflow-popup li.selected a{
+color:#212121
+}
+a.report_abuse{
+font-weight:400
+}
+.Label li,.Label span.label-size,.byline.post-labels a{
+background-color:rgba(55, 175, 192, 0.05);
+border:1px solid rgba(55, 175, 192, 0.05);
+border-radius:15px;
+display:inline-block;
+margin:4px 4px 4px 0;
+padding:3px 8px
+}
+.Label a,.byline.post-labels a{
+color:#37afc0
+}
+.Label ul{
+list-style:none;
+padding:0
+}
+.PopularPosts{
+background-color:#f3fdfe;
+padding:30px 40px
+}
+.PopularPosts .item-content{
+color:#757575;
+margin-top:24px
+}
+.PopularPosts a,.PopularPosts a:hover,.PopularPosts a:visited{
+color:#37afc0
+}
+.PopularPosts .post-title,.PopularPosts .post-title a,.PopularPosts .post-title a:hover,.PopularPosts .post-title a:visited{
+color:#212121;
+font-size:18px;
+font-weight:700;
+line-height:24px
+}
+.PopularPosts,.PopularPosts h3.title a{
+color:#757575;
+font:normal normal 15px Roboto
+}
+.main .PopularPosts{
+padding:16px 40px
+}
+.PopularPosts h3.title{
+font-size:14px;
+margin:0
+}
+.PopularPosts h3.post-title{
+margin-bottom:0
+}
+.PopularPosts .byline{
+color:rgba(0, 0, 0, 0.54)
+}
+.PopularPosts .jump-link{
+float:right;
+margin-top:16px
+}
+.PopularPosts .post-header .byline{
+font-size:.9em;
+font-style:italic;
+margin-top:6px
+}
+.PopularPosts ul{
+list-style:none;
+padding:0;
+margin:0
+}
+.PopularPosts .post{
+padding:20px 0
+}
+.PopularPosts .post+.post{
+border-top:1px dashed #cccccc
+}
+.PopularPosts .item-thumbnail{
+float:left;
+margin-right:32px
+}
+.PopularPosts .item-thumbnail img{
+height:88px;
+padding:0;
+width:88px
+}
+.inline-ad{
+margin-bottom:16px
+}
+.desktop-ad .inline-ad{
+display:block
+}
+.adsbygoogle{
+overflow:hidden
+}
+.vertical-ad-container{
+float:right;
+margin-right:16px;
+width:128px
+}
+.vertical-ad-container .AdSense+.AdSense{
+margin-top:16px
+}
+.inline-ad-placeholder,.vertical-ad-placeholder{
+background:#f3fdfe;
+border:1px solid #000;
+opacity:.9;
+vertical-align:middle;
+text-align:center
+}
+.inline-ad-placeholder span,.vertical-ad-placeholder span{
+margin-top:290px;
+display:block;
+text-transform:uppercase;
+font-weight:700;
+color:#37737d
+}
+.vertical-ad-placeholder{
+height:600px
+}
+.vertical-ad-placeholder span{
+margin-top:290px;
+padding:0 40px
+}
+.inline-ad-placeholder{
+height:90px
+}
+.inline-ad-placeholder span{
+margin-top:36px
+}
+.Attribution{
+color:#757575
+}
+.Attribution a,.Attribution a:hover,.Attribution a:visited{
+color:#ffffff
+}
+.Attribution svg{
+fill:#ffffff
+}
+.sidebar-container{
+box-shadow:1px 1px 3px rgba(0,0,0,.1)
+}
+.sidebar-container,.sidebar-container .sidebar_bottom{
+background-color:#f3fdfe
+}
+.sidebar-container .navigation,.sidebar-container .sidebar_top_wrapper{
+background-color:#f3fdfe
+}
+.sidebar-container .sidebar_top{
+overflow:auto
+}
+.sidebar-container .sidebar_bottom{
+width:100%;
+padding-top:16px
+}
+.sidebar-container .widget:first-child{
+padding-top:0
+}
+.sidebar_top .widget.Profile{
+padding-bottom:16px
+}
+.widget.Profile{
+margin:0;
+width:100%
+}
+.widget.Profile h2{
+display:none
+}
+.widget.Profile h3.title{
+color:rgba(0,0,0,0.52);
+margin:16px 32px
+}
+.widget.Profile .individual{
+text-align:center
+}
+.widget.Profile .individual .profile-link{
+padding:1em
+}
+.widget.Profile .individual .default-avatar-wrapper .avatar-icon{
+margin:auto
+}
+.widget.Profile .team{
+margin-bottom:32px;
+margin-left:32px;
+margin-right:32px
+}
+.widget.Profile ul{
+list-style:none;
+padding:0
+}
+.widget.Profile li{
+margin:10px 0
+}
+.widget.Profile .profile-img{
+border-radius:50%;
+float:none
+}
+.widget.Profile .profile-link{
+color:#212121;
+font-size:.9em;
+margin-bottom:1em;
+opacity:.87;
+overflow:hidden
+}
+.widget.Profile .profile-link.visit-profile{
+border-style:solid;
+border-width:1px;
+border-radius:12px;
+cursor:pointer;
+font-size:12px;
+font-weight:400;
+padding:5px 20px;
+display:inline-block;
+line-height:normal
+}
+.widget.Profile dd{
+color:rgba(0, 0, 0, 0.54);
+margin:0 16px
+}
+.widget.Profile location{
+margin-bottom:1em
+}
+.widget.Profile .profile-textblock{
+font-size:14px;
+line-height:24px;
+position:relative
+}
+body.sidebar-visible .page_body{
+overflow-y:scroll
+}
+body.sidebar-visible .bg-photo-container{
+overflow-y:scroll
+}
+@media screen and (min-width:1440px){
+.sidebar-container{
+margin-top:480px;
+min-height:calc(100% - 480px);
+overflow:visible;
+z-index:32
+}
+.sidebar-container .sidebar_top_wrapper{
+background-color:#f3fdfe;
+height:480px;
+margin-top:-480px
+}
+.sidebar-container .sidebar_top{
+display:-webkit-box;
+display:-webkit-flex;
+display:-ms-flexbox;
+display:flex;
+height:480px;
+-webkit-box-orient:horizontal;
+-webkit-box-direction:normal;
+-webkit-flex-direction:row;
+-ms-flex-direction:row;
+flex-direction:row;
+max-height:480px
+}
+.sidebar-container .sidebar_bottom{
+max-width:284px;
+width:284px
+}
+body.collapsed-header .sidebar-container{
+z-index:15
+}
+.sidebar-container .sidebar_top:empty{
+display:none
+}
+.sidebar-container .sidebar_top>:only-child{
+-webkit-box-flex:0;
+-webkit-flex:0 0 auto;
+-ms-flex:0 0 auto;
+flex:0 0 auto;
+-webkit-align-self:center;
+-ms-flex-item-align:center;
+-ms-grid-row-align:center;
+align-self:center;
+width:100%
+}
+.sidebar_top_wrapper.no-items{
+display:none
+}
+}
+.post-snippet.snippet-container{
+max-height:120px
+}
+.post-snippet .snippet-item{
+line-height:24px
+}
+.post-snippet .snippet-fade{
+background:-webkit-linear-gradient(left,#f3fdfe 0,#f3fdfe 20%,rgba(243, 253, 254, 0) 100%);
+background:linear-gradient(to left,#f3fdfe 0,#f3fdfe 20%,rgba(243, 253, 254, 0) 100%);
+color:#757575;
+height:24px
+}
+.popular-posts-snippet.snippet-container{
+max-height:72px
+}
+.popular-posts-snippet .snippet-item{
+line-height:24px
+}
+.PopularPosts .popular-posts-snippet .snippet-fade{
+color:#757575;
+height:24px
+}
+.main .popular-posts-snippet .snippet-fade{
+background:-webkit-linear-gradient(left,#f3fdfe 0,#f3fdfe 20%,rgba(243, 253, 254, 0) 100%);
+background:linear-gradient(to left,#f3fdfe 0,#f3fdfe 20%,rgba(243, 253, 254, 0) 100%)
+}
+.sidebar_bottom .popular-posts-snippet .snippet-fade{
+background:-webkit-linear-gradient(left,#f3fdfe 0,#f3fdfe 20%,rgba(243, 253, 254, 0) 100%);
+background:linear-gradient(to left,#f3fdfe 0,#f3fdfe 20%,rgba(243, 253, 254, 0) 100%)
+}
+.profile-snippet.snippet-container{
+max-height:192px
+}
+.has-location .profile-snippet.snippet-container{
+max-height:144px
+}
+.profile-snippet .snippet-item{
+line-height:24px
+}
+.profile-snippet .snippet-fade{
+background:-webkit-linear-gradient(left,#f3fdfe 0,#f3fdfe 20%,rgba(243, 253, 254, 0) 100%);
+background:linear-gradient(to left,#f3fdfe 0,#f3fdfe 20%,rgba(243, 253, 254, 0) 100%);
+color:rgba(0, 0, 0, 0.54);
+height:24px
+}
+@media screen and (min-width:1440px){
+.profile-snippet .snippet-fade{
+background:-webkit-linear-gradient(left,#f3fdfe 0,#f3fdfe 20%,rgba(243, 253, 254, 0) 100%);
+background:linear-gradient(to left,#f3fdfe 0,#f3fdfe 20%,rgba(243, 253, 254, 0) 100%)
+}
+}
+@media screen and (max-width:800px){
+.blog-name{
+margin-top:0
+}
+body.item-view .blog-name{
+margin:0 48px
+}
+.centered-bottom{
+padding:8px
+}
+body.item-view .centered-bottom{
+padding:0
+}
+.page_body .centered{
+padding:10px 0
+}
+body.item-view #header,body.item-view .widget.Header{
+margin-right:0
+}
+body.collapsed-header .centered-top-container .blog-name{
+display:block
+}
+body.collapsed-header .centered-top-container .widget.Header h1{
+text-align:center
+}
+.widget.Header header{
+padding:0
+}
+.widget.Header h1{
+font-size:40px;
+line-height:40px;
+margin-bottom:13px
+}
+body.item-view .widget.Header h1{
+text-align:center
+}
+body.item-view .widget.Header p{
+text-align:center
+}
+.blog-name .widget.PageList{
+padding:0
+}
+body.item-view .centered-top{
+margin-bottom:5px
+}
+.search-action,.search-input{
+margin-bottom:-8px
+}
+.search form{
+margin-bottom:8px
+}
+body.item-view .subscribe-section-container{
+margin:5px 0 0 0;
+width:100%
+}
+#page_body.section div.widget.FeaturedPost,div.widget.PopularPosts{
+padding:16px
+}
+div.widget.Blog .blog-posts .post-outer-container{
+padding:16px
+}
+div.widget.Blog .blog-posts .post-outer-container .post-outer{
+padding:0
+}
+.post:first-child{
+margin:0
+}
+.post-body .snippet-thumbnail{
+margin:0 3vw 3vw 0
+}
+.post-body .snippet-thumbnail img{
+height:20vw;
+width:20vw;
+max-height:128px;
+max-width:128px
+}
+div.widget.PopularPosts div.item-thumbnail{
+margin:0 3vw 3vw 0
+}
+div.widget.PopularPosts div.item-thumbnail img{
+height:20vw;
+width:20vw;
+max-height:88px;
+max-width:88px
+}
+.post-title{
+line-height:1
+}
+.post-title,.post-title a{
+font-size:20px
+}
+#page_body.section div.widget.FeaturedPost h3 a{
+font-size:22px
+}
+.mobile-ad .inline-ad{
+display:block
+}
+.page_body.has-vertical-ads .vertical-ad-container,.page_body.has-vertical-ads .vertical-ad-container ins{
+display:none
+}
+.page_body.has-vertical-ads .centered .centered-bottom,.page_body.has-vertical-ads .centered .centered-top{
+display:block;
+width:auto
+}
+div.post-filter-message div{
+padding:8px 16px
+}
+}
+@media screen and (min-width:1440px){
+body{
+position:relative
+}
+body.item-view .blog-name{
+margin-left:48px
+}
+.page_body{
+margin-left:284px
+}
+.search{
+margin-left:0
+}
+.search.focused{
+width:100%
+}
+.sticky{
+padding-left:284px
+}
+.hamburger-menu{
+display:none
+}
+body.collapsed-header .page_body .centered-top-container{
+padding-left:284px;
+padding-right:0;
+width:100%
+}
+body.collapsed-header .centered-top-container .search.focused{
+width:100%
+}
+body.collapsed-header .centered-top-container .blog-name{
+margin-left:0
+}
+body.collapsed-header.item-view .centered-top-container .search.focused{
+width:calc(100% - 50px)
+}
+body.collapsed-header.item-view .centered-top-container .blog-name{
+margin-left:40px
+}
+}
+
+--></style>
+<style id='template-skin-1' type='text/css'><!--
+body#layout .hidden,
+body#layout .invisible {
+display: inherit;
+}
+body#layout .navigation {
+display: none;
+}
+body#layout .page,
+body#layout .sidebar_top,
+body#layout .sidebar_bottom {
+display: inline-block;
+left: inherit;
+position: relative;
+vertical-align: top;
+}
+body#layout .page {
+float: right;
+margin-left: 20px;
+width: 55%;
+}
+body#layout .sidebar-container {
+float: right;
+width: 40%;
+}
+body#layout .hamburger-menu {
+display: none;
+}
+--></style>
+<style>
+    .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=iOjEWmpWlNVmx91RAaWC3irZSyq8cu05pASFz84khXxbIM83x8QP6Hnw7ZIDcZFvcAGSBpGCNsBC);}
+    
+@media (max-width: 480px) { .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=iOjEWmpWlNVmx91RAaWC3irZSyq8cu05pASFz84khXxbIM83x8QP6Hnw7ZIDcZFvcAGSBpGCNsBC&options=w480);}}
+@media (max-width: 640px) and (min-width: 481px) { .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=iOjEWmpWlNVmx91RAaWC3irZSyq8cu05pASFz84khXxbIM83x8QP6Hnw7ZIDcZFvcAGSBpGCNsBC&options=w640);}}
+@media (max-width: 800px) and (min-width: 641px) { .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=iOjEWmpWlNVmx91RAaWC3irZSyq8cu05pASFz84khXxbIM83x8QP6Hnw7ZIDcZFvcAGSBpGCNsBC&options=w800);}}
+@media (max-width: 1200px) and (min-width: 801px) { .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=iOjEWmpWlNVmx91RAaWC3irZSyq8cu05pASFz84khXxbIM83x8QP6Hnw7ZIDcZFvcAGSBpGCNsBC&options=w1200);}}
+/* Last tag covers anything over one higher than the previous max-size cap. */
+@media (min-width: 1201px) { .bg-photo {background-image:url(https\:\/\/themes.googleusercontent.com\/image?id=iOjEWmpWlNVmx91RAaWC3irZSyq8cu05pASFz84khXxbIM83x8QP6Hnw7ZIDcZFvcAGSBpGCNsBC&options=w1600);}}
+  </style>
+<script async='async' src='https://www.gstatic.com/external_hosted/clipboardjs/clipboard.min.js'></script>
+<link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=2942439482132220246&amp;zx=5f5f2895-8607-43dc-ab7d-2584797a7138' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=2942439482132220246&amp;zx=5f5f2895-8607-43dc-ab7d-2584797a7138' rel='stylesheet'/></noscript>
+
+<script type="text/javascript" language="javascript">
+  // Supply ads personalization default for EEA readers
+  // See https://www.blogger.com/go/adspersonalization
+  adsbygoogle = window.adsbygoogle || [];
+  if (typeof adsbygoogle.requestNonPersonalizedAds === 'undefined') {
+    adsbygoogle.requestNonPersonalizedAds = 1;
+  }
+</script>
+
+
+</head>
+<body class='item-view version-1-3-0 variant-indie_baby_blue'>
+<a class='skip-navigation' href='#main' tabindex='0'>
+К основному контенту
+</a>
+<div class='page'>
+<div class='bg-photo-overlay'></div>
+<div class='bg-photo-container'>
+<div class='bg-photo'></div>
+</div>
+<div class='page_body'>
+<div class='centered'>
+<div class='centered-top-placeholder'></div>
+<header class='centered-top-container' role='banner'>
+<div class='centered-top'>
+<a class='return_link' href='https://42-21-school.blogspot.com/'>
+<button class='svg-icon-24-button back-button rtl-reversible-icon flat-icon-button ripple'>
+<svg class='svg-icon-24'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_arrow_back_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+</button>
+</a>
+<div class='search'>
+<button aria-label='Поиск' class='search-expand touch-icon-button'>
+<div class='flat-icon-button ripple'>
+<svg class='svg-icon-24 search-expand-icon'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_search_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+</div>
+</button>
+<div class='section' id='search_top' name='Search (Top)'><div class='widget BlogSearch' data-version='2' id='BlogSearch1'>
+<h3 class='title'>
+Поиск по этому блогу
+</h3>
+<div class='widget-content' role='search'>
+<form action='https://42-21-school.blogspot.com/search' target='_top'>
+<div class='search-input'>
+<input aria-label='Поиск по этому блогу' autocomplete='off' name='q' placeholder='Поиск по этому блогу' value=''/>
+</div>
+<input class='search-action flat-button' type='submit' value='Поиск'/>
+</form>
+</div>
+</div></div>
+</div>
+<div class='clearboth'></div>
+<div class='blog-name container'>
+<div class='container section' id='header' name='Заголовок'><div class='widget Header' data-version='2' id='Header1'>
+<div class='header-widget'>
+<div>
+<h1>
+<a href='https://42-21-school.blogspot.com/'>
+О школе программирования 21
+</a>
+</h1>
+</div>
+<p>
+</p>
+</div>
+</div></div>
+<nav role='navigation'>
+<div class='clearboth section' id='page_list_top' name='Список страниц (верхний)'>
+</div>
+</nav>
+</div>
+</div>
+</header>
+<div>
+<div class='vertical-ad-container no-items section' id='ads' name='Реклама'>
+</div>
+<main class='centered-bottom' id='main' role='main' tabindex='-1'>
+<div class='main section' id='page_body' name='Основная часть страницы'>
+<div class='widget Blog' data-version='2' id='Blog1'>
+<div class='blog-posts hfeed container'>
+<article class='post-outer-container'>
+<div class='post-outer'>
+<div class='post'>
+<script type='application/ld+json'>{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://42-21-school.blogspot.com/2019/07/bsq_52.html"
+  },
+  "headline": "Проверка скорости работы BSQ","description": "\u003cb\u003e // Чтобы измерить скорость работы вашей программы, добавьте в header main.c\u003c/b\u003e\u003cb\u003e #include \u0026lt;time.h\u0026gt; #include \u0026lt;stdio.h\u0026gt; // В начале вашего main() д&#8230;","datePublished": "2019-07-24T15:26:00+03:00",
+  "dateModified": "2019-07-24T15:26:26+03:00","image": {
+    "@type": "ImageObject","url": "https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=w1200",
+    "height": 348,
+    "width": 1200},"publisher": {
+    "@type": "Organization",
+    "name": "Blogger",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=h60",
+      "width": 206,
+      "height": 60
+    }
+  },"author": {
+    "@type": "Person",
+    "name": "-\u003d*\u003d-"
+  }
+}</script>
+<a name='2920422285958965093'></a>
+<h3 class='post-title entry-title'>
+Проверка скорости работы BSQ
+</h3>
+<div class='post-share-buttons post-share-buttons-top'>
+<div class='byline post-share-buttons goog-inline-block'>
+<div aria-owns='sharing-popup-Blog1-byline-2920422285958965093' class='sharing' data-title='Проверка скорости работы BSQ'>
+<button aria-controls='sharing-popup-Blog1-byline-2920422285958965093' aria-label='Поделиться' class='sharing-button touch-icon-button' id='sharing-button-Blog1-byline-2920422285958965093' role='button'>
+<div class='flat-icon-button ripple'>
+<svg class='svg-icon-24'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_share_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+</div>
+</button>
+<div class='share-buttons-container'>
+<ul aria-hidden='true' aria-label='Поделиться' class='share-buttons hidden' id='sharing-popup-Blog1-byline-2920422285958965093' role='menu'>
+<li>
+<span aria-label='Получить ссылку' class='sharing-platform-button sharing-element-link' data-href='https://www.blogger.com/share-post.g?blogID=2942439482132220246&postID=2920422285958965093&target=' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Получить ссылку'>
+<svg class='svg-icon-24 touch-icon sharing-link'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_24_link_dark' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Получить ссылку</span>
+</span>
+</li>
+<li>
+<span aria-label='Поделиться в Facebook' class='sharing-platform-button sharing-element-facebook' data-href='https://www.blogger.com/share-post.g?blogID=2942439482132220246&postID=2920422285958965093&target=facebook' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Поделиться в Facebook'>
+<svg class='svg-icon-24 touch-icon sharing-facebook'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_24_facebook_dark' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Facebook</span>
+</span>
+</li>
+<li>
+<span aria-label='Поделиться в Twitter' class='sharing-platform-button sharing-element-twitter' data-href='https://www.blogger.com/share-post.g?blogID=2942439482132220246&postID=2920422285958965093&target=twitter' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Поделиться в Twitter'>
+<svg class='svg-icon-24 touch-icon sharing-twitter'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_24_twitter_dark' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Twitter</span>
+</span>
+</li>
+<li>
+<span aria-label='Поделиться в Pinterest' class='sharing-platform-button sharing-element-pinterest' data-href='https://www.blogger.com/share-post.g?blogID=2942439482132220246&postID=2920422285958965093&target=pinterest' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Поделиться в Pinterest'>
+<svg class='svg-icon-24 touch-icon sharing-pinterest'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_24_pinterest_dark' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Pinterest</span>
+</span>
+</li>
+<li>
+<span aria-label='Электронная почта' class='sharing-platform-button sharing-element-email' data-href='https://www.blogger.com/share-post.g?blogID=2942439482132220246&postID=2920422285958965093&target=email' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Электронная почта'>
+<svg class='svg-icon-24 touch-icon sharing-email'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_24_email_dark' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Электронная почта</span>
+</span>
+</li>
+<li aria-hidden='true' class='hidden'>
+<span aria-label='Поделиться в других приложениях' class='sharing-platform-button sharing-element-other' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Поделиться в других приложениях'>
+<svg class='svg-icon-24 touch-icon sharing-sharingOther'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_more_horiz_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Другие приложения</span>
+</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class='post-header'>
+<div class='post-header-line-1'>
+<span class='byline post-timestamp'>
+<meta content='https://42-21-school.blogspot.com/2019/07/bsq_52.html'/>
+<a class='timestamp-link' href='https://42-21-school.blogspot.com/2019/07/bsq_52.html' rel='bookmark' title='permanent link'>
+<time class='published' datetime='2019-07-24T15:26:00+03:00' title='2019-07-24T15:26:00+03:00'>
+24.7.19
+</time>
+</a>
+</span>
+</div>
+</div>
+<div class='post-body entry-content float-container' id='post-body-2920422285958965093'>
+<pre><span class="c1"><span style="font-size: x-small;"><span style="font-family: &quot;Courier New&quot;, Courier, monospace;"><b>// Чтобы измерить скорость работы вашей программы, добавьте в header main.c</b></span></span></span><span style="font-size: x-small;"><span style="font-family: &quot;Courier New&quot;, Courier, monospace;"><b>
+<span style="background-color: yellow;"><span class="cp">#include &lt;time.h&gt;</span>
+<span class="cp">#include &lt;stdio.h&gt;</span></span>
+<span class="c1">// В начале вашего main() добавьте:</span>
+<span style="background-color: yellow;"><span class="kt">clock_t</span> <span class="n">tic</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span></span>
+<span class="c1">// в конце main() перед return (0) добавьте:</span>
+<span style="background-color: yellow;"><span class="kt">clock_t</span> <span class="n">toc</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"Elapsed: %f seconds</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">toc</span> <span class="o">-</span> <span class="n">tic</span><span class="p">)</span> <span class="o">/</span> <span class="n">CLOCKS_PER_SEC</span><span class="p">);</span></span>
+<span class="c1">// Не забудьте удалить эти данные, когда будете пушить программу на проверку мулинету!</span></b></span></span></pre>
+<pre><span class="c1">&nbsp;</span></pre>
+<pre><span class="c1">&nbsp;</span></pre>
+</div>
+<div class='post-bottom'>
+<div class='post-footer float-container'>
+<div class='post-footer-line post-footer-line-1'>
+</div>
+<div class='post-footer-line post-footer-line-2'>
+</div>
+<div class='post-footer-line post-footer-line-3'>
+</div>
+</div>
+<div class='post-share-buttons post-share-buttons-bottom invisible'>
+<div class='byline post-share-buttons goog-inline-block'>
+<div aria-owns='sharing-popup-Blog1-byline-2920422285958965093' class='sharing' data-title='Проверка скорости работы BSQ'>
+<button aria-controls='sharing-popup-Blog1-byline-2920422285958965093' aria-label='Поделиться' class='sharing-button touch-icon-button' id='sharing-button-Blog1-byline-2920422285958965093' role='button'>
+<div class='flat-icon-button ripple'>
+<svg class='svg-icon-24'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_share_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+</div>
+</button>
+<div class='share-buttons-container'>
+<ul aria-hidden='true' aria-label='Поделиться' class='share-buttons hidden' id='sharing-popup-Blog1-byline-2920422285958965093' role='menu'>
+<li>
+<span aria-label='Получить ссылку' class='sharing-platform-button sharing-element-link' data-href='https://www.blogger.com/share-post.g?blogID=2942439482132220246&postID=2920422285958965093&target=' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Получить ссылку'>
+<svg class='svg-icon-24 touch-icon sharing-link'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_24_link_dark' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Получить ссылку</span>
+</span>
+</li>
+<li>
+<span aria-label='Поделиться в Facebook' class='sharing-platform-button sharing-element-facebook' data-href='https://www.blogger.com/share-post.g?blogID=2942439482132220246&postID=2920422285958965093&target=facebook' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Поделиться в Facebook'>
+<svg class='svg-icon-24 touch-icon sharing-facebook'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_24_facebook_dark' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Facebook</span>
+</span>
+</li>
+<li>
+<span aria-label='Поделиться в Twitter' class='sharing-platform-button sharing-element-twitter' data-href='https://www.blogger.com/share-post.g?blogID=2942439482132220246&postID=2920422285958965093&target=twitter' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Поделиться в Twitter'>
+<svg class='svg-icon-24 touch-icon sharing-twitter'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_24_twitter_dark' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Twitter</span>
+</span>
+</li>
+<li>
+<span aria-label='Поделиться в Pinterest' class='sharing-platform-button sharing-element-pinterest' data-href='https://www.blogger.com/share-post.g?blogID=2942439482132220246&postID=2920422285958965093&target=pinterest' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Поделиться в Pinterest'>
+<svg class='svg-icon-24 touch-icon sharing-pinterest'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_24_pinterest_dark' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Pinterest</span>
+</span>
+</li>
+<li>
+<span aria-label='Электронная почта' class='sharing-platform-button sharing-element-email' data-href='https://www.blogger.com/share-post.g?blogID=2942439482132220246&postID=2920422285958965093&target=email' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Электронная почта'>
+<svg class='svg-icon-24 touch-icon sharing-email'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_24_email_dark' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Электронная почта</span>
+</span>
+</li>
+<li aria-hidden='true' class='hidden'>
+<span aria-label='Поделиться в других приложениях' class='sharing-platform-button sharing-element-other' data-url='https://42-21-school.blogspot.com/2019/07/bsq_52.html' role='menuitem' tabindex='-1' title='Поделиться в других приложениях'>
+<svg class='svg-icon-24 touch-icon sharing-sharingOther'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_more_horiz_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<span class='platform-sharing-text'>Другие приложения</span>
+</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class='comments embed' data-num-comments='0' id='comments'>
+<a name='comments'></a>
+<h3 class='title'>Комментарии</h3>
+<div id='Blog1_comments-block-wrapper'>
+</div>
+<div class='footer'>
+<div class='comment-form'>
+<a name='comment-form'></a>
+<h4 id='comment-post-message'>Отправить комментарий</h4>
+<a href='https://www.blogger.com/comment-iframe.g?blogID=2942439482132220246&postID=2920422285958965093&skin=contempo' id='comment-editor-src'></a>
+<iframe allowtransparency='allowtransparency' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='410px' id='comment-editor' name='comment-editor' src='' width='100%'></iframe>
+<script src='https://www.blogger.com/static/v1/jsbin/2268833846-comment_from_post_iframe.js' type='text/javascript'></script>
+<script type='text/javascript'>
+      BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html');
+    </script>
+</div>
+</div>
+</section>
+<div class='desktop-ad mobile-ad'>
+</div>
+</article>
+</div>
+</div><div class='widget PopularPosts' data-version='2' id='PopularPosts1'>
+<h3 class='title'>
+Популярные сообщения из этого блога
+</h3>
+<div class='widget-content'>
+<div role='feed'>
+<article class='post' role='article'>
+<h3 class='post-title'><a href='https://42-21-school.blogspot.com/2019/07/main.html'>Пример правильного оформленя кода C по нормам школы 21</a></h3>
+<div class='post-header'>
+<div class='post-header-line-1'>
+<span class='byline post-timestamp'>
+<meta content='https://42-21-school.blogspot.com/2019/07/main.html'/>
+<a class='timestamp-link' href='https://42-21-school.blogspot.com/2019/07/main.html' rel='bookmark' title='permanent link'>
+<time class='published' datetime='2019-07-10T12:05:00+03:00' title='2019-07-10T12:05:00+03:00'>
+10.7.19
+</time>
+</a>
+</span>
+</div>
+</div>
+<div class='item-content float-container'>
+<div class='item-thumbnail'>
+<a href='https://42-21-school.blogspot.com/2019/07/main.html'>
+<img alt='Изображение' sizes='72px' src='https://1.bp.blogspot.com/-FjoMv38cqGo/XSWxl_UEKnI/AAAAAAAAREs/tTf6txW4PjcUtrmbQ0BQjMB8iKpG0HL7gCLcBGAs/s640/Norminette-21-school-sberbank.png' srcset='https://1.bp.blogspot.com/-FjoMv38cqGo/XSWxl_UEKnI/AAAAAAAAREs/tTf6txW4PjcUtrmbQ0BQjMB8iKpG0HL7gCLcBGAs/w72-h72-p-k-no-nu/Norminette-21-school-sberbank.png 72w, https://1.bp.blogspot.com/-FjoMv38cqGo/XSWxl_UEKnI/AAAAAAAAREs/tTf6txW4PjcUtrmbQ0BQjMB8iKpG0HL7gCLcBGAs/w144-h144-p-k-no-nu/Norminette-21-school-sberbank.png 144w'/>
+</a>
+</div>
+<div class='popular-posts-snippet snippet-container r-snippet-container'>
+<div class='snippet-item r-snippetized'>
+Вот пример правильного оформления кода с комментариями (если будете загонять его на проверку - удалите комментарии)<br>
+Так же напоминаю, что если вас не просят написать main (как в этой функции), то делать это не надо.<br>
+Ниже будет список ошибок (которые удобно находить по command+F): буду
+ редактировать и дополнять пост всеми ошибками, которые мне встретятся, с
+ описанием их исправления. <br>
+Напоминаю, что для проверки стоит использовать команду norminette -R CheckForbiddenSourceHeader в директории с программой на с)<br>
+Для проверки файлов типа *.h используется только norminette, без флагов.<br>
+P.S. Спасибо за ваши лайки! Я чувствую, что писал этот пост не зря.)<br>
+P.S.S. А для любителей есть вот такая штука <a href="https://forum.intra.42.fr/topics/20837/messages/last" rel="nofollow" target="_blank">https://forum.intra.42.fr/topics/20837/messages/last12</a> - она позволяет раскрашивать вывод norminette.<br>... 
+Ошибки в коде
+Error: global scope bad alignedНайдите в своей функции строчку с объявлением функции вида int main.Удалите пробел после int и вставьте после него два ТАБВы восхитительны!
+Error: &#8230;
+</div>
+<a class='snippet-fade r-snippet-fade hidden' href='https://42-21-school.blogspot.com/2019/07/main.html'></a>
+</div>
+<div class='jump-link flat-button ripple'>
+<a href='https://42-21-school.blogspot.com/2019/07/main.html' title='Пример правильного оформленя кода C по нормам школы 21'>
+Далее...
+</a>
+</div>
+</div>
+</article>
+<article class='post' role='article'>
+<h3 class='post-title'><a href='https://42-21-school.blogspot.com/2019/07/42-stupidity.html'>Как проверять свой код с помощью тестов 42 Stupidity</a></h3>
+<div class='post-header'>
+<div class='post-header-line-1'>
+<span class='byline post-timestamp'>
+<meta content='https://42-21-school.blogspot.com/2019/07/42-stupidity.html'/>
+<a class='timestamp-link' href='https://42-21-school.blogspot.com/2019/07/42-stupidity.html' rel='bookmark' title='permanent link'>
+<time class='published' datetime='2019-07-15T06:54:00+03:00' title='2019-07-15T06:54:00+03:00'>
+15.7.19
+</time>
+</a>
+</span>
+</div>
+</div>
+<div class='item-content float-container'>
+<div class='popular-posts-snippet snippet-container r-snippet-container'>
+<div class='snippet-item r-snippetized'>
+Переходим в домашний каталог командой cd ~<br>
+Клонируем репозиторий командой
+<b>git clone https://github.com/mirror12k/42us-stupidity.git 42Stupidity</b><br>
+Переходим в созданный каталог
+<b>cd  42Stupidity</b><br>
+Клонируем свой репозиторий с залитыми заданиями в каталог внутри каталога 42Stupidity.
+Например:
+<b>git clone vogsphere@vogsphere.21-school.ru:intra/2019/activities/piscine_c_day_05/nick day05</b><br>
+Далее даете команду
+<b>./spawn.pl day05 config_d05.pl</b><br>
+В данном случае day05 это каталог с заданиями day05 и в нем есть подкаталоги ex00, ex01 и т.д.
+После этого генерируются файлы для создания тестов.<br>
+Затем даете команду <b>./tools/build.sh</b>
+Она уже создает исполняемые файлы с тестами ваших функций.<br>
+После этого прогоняете тесты на норминет командой <b>./tools/verify.sh</b><br>
+Ну и в конце концов сами тесты. Команда <b>./tools/check_all.sh</b>
+</div>
+<a class='snippet-fade r-snippet-fade hidden' href='https://42-21-school.blogspot.com/2019/07/42-stupidity.html'></a>
+</div>
+<div class='jump-link flat-button ripple'>
+<a href='https://42-21-school.blogspot.com/2019/07/42-stupidity.html' title='Как проверять свой код с помощью тестов 42 Stupidity'>
+Далее...
+</a>
+</div>
+</div>
+</article>
+<article class='post' role='article'>
+<h3 class='post-title'><a href='https://42-21-school.blogspot.com/2019/07/big-brother-watch-you.html'>Big brother watch you!!!!</a></h3>
+<div class='post-header'>
+<div class='post-header-line-1'>
+<span class='byline post-timestamp'>
+<meta content='https://42-21-school.blogspot.com/2019/07/big-brother-watch-you.html'/>
+<a class='timestamp-link' href='https://42-21-school.blogspot.com/2019/07/big-brother-watch-you.html' rel='bookmark' title='permanent link'>
+<time class='published' datetime='2019-07-19T15:11:00+03:00' title='2019-07-19T15:11:00+03:00'>
+19.7.19
+</time>
+</a>
+</span>
+</div>
+</div>
+<div class='item-content float-container'>
+<div class='item-thumbnail'>
+<a href='https://42-21-school.blogspot.com/2019/07/big-brother-watch-you.html'>
+<img alt='Изображение' sizes='72px' src='https://1.bp.blogspot.com/-pnYJa6Bf4iA/XTGzIjOyViI/AAAAAAAARIU/JV1mv57gLd0cHUjvPJzxILo50sPDum8hgCLcBGAs/s1600/BitBro.png' srcset='https://1.bp.blogspot.com/-pnYJa6Bf4iA/XTGzIjOyViI/AAAAAAAARIU/JV1mv57gLd0cHUjvPJzxILo50sPDum8hgCLcBGAs/w72-h72-p-k-no-nu/BitBro.png 72w, https://1.bp.blogspot.com/-pnYJa6Bf4iA/XTGzIjOyViI/AAAAAAAARIU/JV1mv57gLd0cHUjvPJzxILo50sPDum8hgCLcBGAs/w144-h144-p-k-no-nu/BitBro.png 144w'/>
+</a>
+</div>
+<div class='popular-posts-snippet snippet-container r-snippet-container'>
+<div class='snippet-item r-snippetized'>
+Таки открылось что все что вы делаете за компами в школе записывается и анализируется.<br><br> <br> <br> 
+А вот тут и сам текст этих файликов: <br> <b>cat /etc/zshenv<br>precmd () {<br>&#160;&#160;&#160; command=&quot;$(fc -n -e - -l -1)&quot;<br>&#160;&#160;&#160; /bin/syslog.py &quot;zsh: $USER : $command&quot;<br>}</b> <br> <br> <b>cat /bin/syslog.py<br>#!/usr/bin/python<br># clem@42.fr - 02/11/2015<br>try:<br>&#160;&#160;&#160; import socket<br>&#160;&#160;&#160; import time<br>&#160;&#160;&#160; import sys<br><br>&#160;&#160;&#160; if len(sys.argv) &gt; 1:<br>&#160;&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)<br>&#160;&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; data = &quot;&lt;30&gt;%s %s %s&quot; % (socket.gethostname(), time.strftime(&#39;%a %d %H:%M:%S&#39;), &#39; &#39;.join(sys.argv[1:]))<br>&#160;&#160;&#160; &#160;&#160;&#160; &#160;&#160;&#160; sock.sendto(data, (&#39;syslog.21-school.ru&#39;, 514))<br>&#160;&#160;&#160; else:<br>&#160;&#160;&#160; &#160;&#160;&#160; print &#39;Usage: %s &lt;message&gt;&#39; % sys.argv[0]<br>except:<br>&#160;&#160;&#160; pass</b> <br><br>
+</div>
+<a class='snippet-fade r-snippet-fade hidden' href='https://42-21-school.blogspot.com/2019/07/big-brother-watch-you.html'></a>
+</div>
+<div class='jump-link flat-button ripple'>
+<a href='https://42-21-school.blogspot.com/2019/07/big-brother-watch-you.html' title='Big brother watch you!!!!'>
+Далее...
+</a>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div></div>
+</main>
+</div>
+</div>
+</div>
+</div>
+<aside class='sidebar-container container sidebar-invisible' role='complementary'>
+<div class='navigation'>
+<button class='svg-icon-24-button flat-icon-button ripple sidebar-back'>
+<svg class='svg-icon-24'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_arrow_back_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+</button>
+</div>
+<div class='sidebar_top_wrapper no-items'>
+<div class='sidebar_top no-items section' id='sidebar_top' name='Боковая панель (верхняя)'>
+</div>
+</div>
+<div class='sidebar_bottom section' id='sidebar_bottom' name='Боковая панель (нижняя)'><div class='widget BlogArchive' data-version='2' id='BlogArchive1'>
+<details class='collapsible extendable'>
+<summary>
+<div class='collapsible-title'>
+<h3 class='title'>
+Архив
+</h3>
+<svg class='svg-icon-24 chevron-down'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_expand_more_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<svg class='svg-icon-24 chevron-up'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_expand_less_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+</div>
+</summary>
+<div class='widget-content'>
+<div id='ArchiveList'>
+<div id='BlogArchive1_ArchiveList'>
+<div class='first-items'>
+<ul class='hierarchy'>
+<li class='archivedate'>
+<div class='hierarchy-title'>
+<a class='post-count-link' href='https://42-21-school.blogspot.com/2019/'>
+2019
+<span class='post-count'>54</span>
+</a>
+</div>
+<div class='hierarchy-content'>
+<ul class='hierarchy'>
+<li class='archivedate'>
+<div class='hierarchy-title'>
+<a class='post-count-link' href='https://42-21-school.blogspot.com/2019/07/'>
+июля 2019
+<span class='post-count'>44</span>
+</a>
+</div>
+<div class='hierarchy-content'>
+<ul class='posts hierarchy'>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21.html'>10 правил, чтобы научиться плавать в бассейне</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/main.html'>Пример правильного оформленя кода C по нормам школ...</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21-school-norm.html'>Стандарты написания кода в 21-school: The Norm</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21_11.html'>Гайд по тому, как минимизировать шанс получения ти...</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/norminette-21-42.html'>Вот что такое проверка norminette в школе 21</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/c-online.html'>Проверка кода C online</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/tij.html'>Что такое ТИЖ (TIJ) и с чем его едят</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21_13.html'>Видео школы программирования 21</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/blog-post.html'>Начальные тесты, для того чтобы попасть в бассейн</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21-42.html'>Экзамены в школе программирования 21</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/welcome-file.html'>Тестирование своего кода</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/blog-post_14.html'>РЕГИСТРИРУЙТЕСЬ НА ПРОЕКТЫ!</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/2019.html'>Вот так выглядит календарь бассейна на июль 2019</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/faq-21.html'>FAQ бокала шоклы программирования 21</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/42-stupidity.html'>Как проверять свой код с помощью тестов 42 Stupidi...</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/slack.html'>Что такое Slack</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/blog-post_16.html'>Таблица видео и документов бассейна с внутреннего ...</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21_16.html'>А вот ну очень крутой чел с уровнем 21 (самый высо...</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/day10-makefile.html'>Day10 Makefile</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/rush.html'>Получение ТИЖа за отказ от защиты группового проек...</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/norminet.html'>Делаем проверку norminette удобнее</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21_57.html'>Названия проектов школы программирования 21 на осн...</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21_37.html'>Помощь на интре школы программирования 21</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/vim.html'>Хорошая справка по командам редактора VIM</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/moulinette.html'>Проверка заданий moulinette</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/42-header-for-vim.html'>42 header for VIM</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/vim-zsh.html'>Настройки vim и zsh</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/42homebrew.html'>42homebrew</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/blog-post_18.html'>Книга всех времен и народов по Си</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/moulinette_18.html'>Примеры проверки moulinette</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/big-brother-watch-you.html'>Big brother watch you!!!!</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21_23.html'>Лирика бассейна школы программирования 21</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/bsq.html'>Перевод задания BSQ</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/bsq_24.html'>Скрипт генерации карт для BSQ</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/bsq_52.html'>Проверка скорости работы BSQ</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/blog-post_24.html'>Как быстро разобраться с указателями в Си</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21_25.html'>В школе программирования 21 сперциально создают ст...</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21_68.html'>Выдержки из официальных документов школы программи...</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21_65.html'>Немного про экзамены в школе программирования 21</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/tij_25.html'>TIJелая жизнь участников бассейна!</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/21_0.html'>Правила финального экзамена школы программирования...</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/blog-post_26.html'>Советы для решения задач на экзамене.</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/blog-post_82.html'>Как не наступить на грабли на экзаменах!</a>
+</li>
+<li>
+<a href='https://42-21-school.blogspot.com/2019/07/holy-graph-42-21.html'>Holy Graph 42 Карта проектов школы программировани...</a>
+</li>
+</ul>
+</div>
+</li>
+<li class='archivedate'>
+<div class='hierarchy-title'>
+<a class='post-count-link' href='https://42-21-school.blogspot.com/2019/08/'>
+августа 2019
+<span class='post-count'>10</span>
+</a>
+</div>
+<div class='hierarchy-content'>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div><div class='widget Label' data-version='2' id='Label1'>
+<details class='collapsible extendable'>
+<summary>
+<div class='collapsible-title'>
+<h3 class='title'>
+Ярлыки
+</h3>
+<svg class='svg-icon-24 chevron-down'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_expand_more_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+<svg class='svg-icon-24 chevron-up'>
+<use xlink:href='/responsive/sprite_v1_6.css.svg#ic_expand_less_black_24dp' xmlns:xlink='http://www.w3.org/1999/xlink'></use>
+</svg>
+</div>
+</summary>
+<div class='widget-content list-label-widget-content'>
+<div class='first-items'>
+<ul>
+<li><a class='label-name' href='https://42-21-school.blogspot.com/search/label/norminette'>norminette<span class='label-count'>1</span></a></li>
+<li><a class='label-name' href='https://42-21-school.blogspot.com/search/label/TIJ'>TIJ<span class='label-count'>4</span></a></li>
+<li><a class='label-name' href='https://42-21-school.blogspot.com/search/label/vim'>vim<span class='label-count'>1</span></a></li>
+<li><a class='label-name' href='https://42-21-school.blogspot.com/search/label/zsh'>zsh<span class='label-count'>1</span></a></li>
+</ul>
+</div>
+</div>
+</details>
+</div><div class='widget Stats' data-version='2' id='Stats1'>
+<h3 class='title'>
+Статистика
+</h3>
+<div class='widget-content'>
+<div id='Stats1_content' style='display: none;'>
+<script src='https://www.gstatic.com/charts/loader.js' type='text/javascript'></script>
+<span id='Stats1_sparklinespan' style='display:inline-block; width:75px; height:30px'></span>
+<span class='counter-wrapper text-counter-wrapper' id='Stats1_totalCount'>
+</span>
+</div>
+</div>
+</div></div>
+</aside>
+<script type="text/javascript" src="https://resources.blogblog.com/blogblog/data/res/3250549316-indie_compiled.js" async="true"></script>
+<!--\u0412\u044b \u043d\u0435\u0441\u0435\u0442\u0435 \u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0441\u0442\u044c \u0437\u0430 \u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u0435 \u043f\u043e\u0441\u0435\u0442\u0438\u0442\u0435\u043b\u0435\u0439 \u0441\u0432\u043e\u0435\u0433\u043e \u0431\u043b\u043e\u0433\u0430 \u043e\u0431 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u0438 \u0444\u0430\u0439\u043b\u043e\u0432 cookie \u0438 \u043e \u0442\u043e\u043c, \u043a\u0430\u043a\u0438\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u043e \u043f\u043e\u0441\u0435\u0442\u0438\u0442\u0435\u043b\u044f\u0445 \u0441\u043e\u0431\u0438\u0440\u0430\u044e\u0442\u0441\u044f. \u0421\u043f\u0435\u0446\u0438\u0430\u043b\u0438\u0441\u0442\u044b Blogger \u043f\u043e\u0434\u0433\u043e\u0442\u043e\u0432\u0438\u043b\u0438 \u0434\u043b\u044f \u0432\u0430\u0441 \u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u043e\u0435 \u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u0435, \u043a\u043e\u0442\u043e\u0440\u043e\u0435 \u043c\u043e\u0436\u043d\u043e \u0440\u0430\u0437\u043c\u0435\u0441\u0442\u0438\u0442\u044c \u0432 \u0431\u043b\u043e\u0433\u0435. \u0412\u044b \u0442\u0430\u043a\u0436\u0435 \u043c\u043e\u0436\u0435\u0442\u0435 \u0432\u043d\u0435\u0441\u0442\u0438 \u0432 \u043d\u0435\u0433\u043e \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f \u0438\u043b\u0438 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u0441\u043e\u0431\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0439 \u0432\u0430\u0440\u0438\u0430\u043d\u0442. \u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u0441\u0432\u0435\u0434\u0435\u043d\u0438\u044f \u043f\u0440\u0438\u0432\u0435\u0434\u0435\u043d\u044b \u043d\u0430 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435 http://www.blogger.com/go/cookiechoices.-->
+<script defer='' src='/js/cookienotice.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function(event) {
+      window.cookieChoices && cookieChoices.showCookieConsentBar && cookieChoices.showCookieConsentBar(
+          (window.cookieOptions && cookieOptions.msg) || '\u042d\u0442\u043e\u0442 \u0441\u0430\u0439\u0442 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0435\u0442 \u0444\u0430\u0439\u043b\u044b cookie Google. \u042d\u0442\u043e \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e \u0434\u043b\u044f \u0435\u0433\u043e \u043d\u043e\u0440\u043c\u0430\u043b\u044c\u043d\u043e\u0439 \u0440\u0430\u0431\u043e\u0442\u044b \u0438 \u0430\u043d\u0430\u043b\u0438\u0437\u0430 \u0442\u0440\u0430\u0444\u0438\u043a\u0430. \u0418\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f \u043e \u0432\u0430\u0448\u0435\u043c IP-\u0430\u0434\u0440\u0435\u0441\u0435 \u0438 \u0430\u0433\u0435\u043d\u0442\u0435 \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f, \u0430 \u0442\u0430\u043a\u0436\u0435 \u043f\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u0438 \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0441\u0442\u0438 \u0438 \u0431\u0435\u0437\u043e\u043f\u0430\u0441\u043d\u043e\u0441\u0442\u0438 \u043f\u0435\u0440\u0435\u0434\u0430\u044e\u0442\u0441\u044f \u0432 Google. \u042d\u0442\u043e \u043f\u043e\u043c\u043e\u0433\u0430\u0435\u0442 \u043e\u0431\u0435\u0441\u043f\u0435\u0447\u0438\u0432\u0430\u0442\u044c \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u043e \u0443\u0441\u043b\u0443\u0433, \u043d\u0430\u043a\u0430\u043f\u043b\u0438\u0432\u0430\u0442\u044c \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0443 \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u0438\u044f, \u0430 \u0442\u0430\u043a\u0436\u0435 \u0432\u044b\u044f\u0432\u043b\u044f\u0442\u044c \u0438 \u0443\u0441\u0442\u0440\u0430\u043d\u044f\u0442\u044c \u043d\u0430\u0440\u0443\u0448\u0435\u043d\u0438\u044f.',
+          (window.cookieOptions && cookieOptions.close) || '\u041e\u041a',
+          (window.cookieOptions && cookieOptions.learn) || '\u041f\u043e\u0434\u0440\u043e\u0431\u043d\u0435\u0435',
+          (window.cookieOptions && cookieOptions.link) || 'https://www.blogger.com/go/blogspot-cookies');
+    });
+  </script>
+
+<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/2289495658-widgets.js"></script>
+<script type='text/javascript'>
+window['__wavt'] = 'AOuZoY5BTvlDIWVvjHUHCxB6CTwZyTZI-A:1570979005211';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d2942439482132220246','//42-21-school.blogspot.com/2019/07/bsq_52.html','2942439482132220246');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '2942439482132220246', 'title': 'О школе программирования 21', 'url': 'https://42-21-school.blogspot.com/2019/07/bsq_52.html', 'canonicalUrl': 'https://42-21-school.blogspot.com/2019/07/bsq_52.html', 'homepageUrl': 'https://42-21-school.blogspot.com/', 'searchUrl': 'https://42-21-school.blogspot.com/search', 'canonicalHomepageUrl': 'https://42-21-school.blogspot.com/', 'blogspotFaviconUrl': 'https://42-21-school.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': '', 'encoding': 'UTF-8', 'locale': 'ru', 'localeUnderscoreDelimited': 'ru', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22О школе программирования 21 - Atom\x22 href\x3d\x22https://42-21-school.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22О школе программирования 21 - RSS\x22 href\x3d\x22https://42-21-school.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22О школе программирования 21 - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/2942439482132220246/posts/default\x22 /\x3e\n\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22О школе программирования 21 - Atom\x22 href\x3d\x22https://42-21-school.blogspot.com/feeds/2920422285958965093/comments/default\x22 /\x3e\n', 'meTag': '', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/e8099bf747012a46', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'disableGComments': true, 'sharing': {'platforms': [{'name': 'Получить ссылку', 'key': 'link', 'shareMessage': 'Получить ссылку', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Поделиться в Facebook', 'target': 'facebook'}, {'name': 'Написать об этом в блоге', 'key': 'blogThis', 'shareMessage': 'Написать об этом в блоге', 'target': 'blog'}, {'name': 'Twitter', 'key': 'twitter', 'shareMessage': 'Поделиться в Twitter', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Поделиться в Pinterest', 'target': 'pinterest'}, {'name': 'Электронная почта', 'key': 'email', 'shareMessage': 'Электронная почта', 'target': 'email'}], 'disableGooglePlus': true, 'googlePlusShareButtonWidth': 300, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27ru\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Далее...', 'pageType': 'item', 'postId': '2920422285958965093', 'pageName': 'Проверка скорости работы BSQ', 'pageTitle': 'О школе программирования 21: Проверка скорости работы BSQ'}}, {'name': 'features', 'data': {'sharing_get_link_dialog': 'true', 'sharing_native': 'false'}}, {'name': 'messages', 'data': {'edit': 'Изменить', 'linkCopiedToClipboard': 'Ссылка скопирована в буфер обмена!', 'ok': 'ОК', 'postLink': 'Ссылка на сообщение'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Дополнительно', 'isResponsive': true, 'isAlternateRendering': false, 'isCustom': true, 'variant': 'indie_baby_blue', 'variantId': 'indie_baby_blue'}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': 'Проверка скорости работы BSQ', 'description': '// Чтобы измерить скорость работы вашей программы, добавьте в header main.c  #include \x3ctime.h\x3e  #include \x3cstdio.h\x3e  // В начале вашего main(...', 'url': 'https://42-21-school.blogspot.com/2019/07/bsq_52.html', 'type': 'item', 'isSingleItem': true, 'isMultipleItems': false, 'isError': false, 'isPage': false, 'isPost': true, 'isHomepage': false, 'isArchive': false, 'isLabelSearch': false, 'postId': 2920422285958965093}}, {'name': 'widgets', 'data': [{'title': 'Поиск по этому блогу', 'type': 'BlogSearch', 'sectionId': 'search_top', 'id': 'BlogSearch1'}, {'title': 'О школе программирования 21 (заголовок)', 'type': 'Header', 'sectionId': 'header', 'id': 'Header1'}, {'title': '', 'type': 'PageList', 'sectionId': 'page_list_top', 'id': 'PageList1'}, {'title': '', 'type': 'FeaturedPost', 'sectionId': 'page_body', 'id': 'FeaturedPost1', 'postId': '5094068890861661320'}, {'title': 'Сообщения блога', 'type': 'Blog', 'sectionId': 'page_body', 'id': 'Blog1', 'posts': [{'id': '2920422285958965093', 'title': 'Проверка скорости работы BSQ', 'showInlineAds': true}], 'headerByline': {'regionName': 'header1', 'items': [{'name': 'share', 'label': ''}, {'name': 'timestamp', 'label': ''}]}, 'footerBylines': [{'regionName': 'footer1', 'items': [{'name': 'comments', 'label': 'коммент.'}, {'name': 'icons', 'label': ''}]}, {'regionName': 'footer2', 'items': [{'name': 'labels', 'label': ''}]}, {'regionName': 'footer3', 'items': [{'name': 'location', 'label': 'Место:'}]}], 'allBylineItems': [{'name': 'share', 'label': ''}, {'name': 'timestamp', 'label': ''}, {'name': 'comments', 'label': 'коммент.'}, {'name': 'icons', 'label': ''}, {'name': 'labels', 'label': ''}, {'name': 'location', 'label': 'Место:'}]}, {'title': '', 'type': 'PopularPosts', 'sectionId': 'page_body', 'id': 'PopularPosts1', 'posts': [{'title': 'Пример правильного оформленя кода C по нормам школы 21', 'id': 1219336855966080277}, {'title': 'Как проверять свой код с помощью тестов 42 Stupidity', 'id': 8840771281500011708}, {'title': 'Big brother watch you!!!!', 'id': 9157575641123253562}]}, {'title': '', 'type': 'BlogArchive', 'sectionId': 'sidebar_bottom', 'id': 'BlogArchive1'}, {'title': 'Ярлыки', 'type': 'Label', 'sectionId': 'sidebar_bottom', 'id': 'Label1'}, {'title': 'Статистика', 'type': 'Stats', 'sectionId': 'sidebar_bottom', 'id': 'Stats1'}]}]);
+_WidgetManager._RegisterWidget('_BlogSearchView', new _WidgetInfo('BlogSearch1', 'search_top', document.getElementById('BlogSearch1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'page_list_top', document.getElementById('PageList1'), {'title': '', 'links': [{'isCurrentPage': false, 'href': 'https://42-21-school.blogspot.com/', 'title': 'Главная страница'}, {'isCurrentPage': false, 'href': 'https://42-21-school.blogspot.com/p/blog-page.html', 'id': '5655283985084347562', 'title': 'Прочитай это!'}, {'isCurrentPage': false, 'href': 'https://42-21-school.blogspot.com/p/blog-page_15.html', 'id': '5822882767046306276', 'title': 'Ссылки'}, {'isCurrentPage': false, 'href': 'https://42-21-school.blogspot.com/p/blog-page_10.html', 'id': '7722728134347453685', 'title': 'О блоге'}], 'mobile': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FeaturedPostView', new _WidgetInfo('FeaturedPost1', 'page_body', document.getElementById('FeaturedPost1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'page_body', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/3147056218-lbx__ru.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/368954415-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PopularPostsView', new _WidgetInfo('PopularPosts1', 'page_body', document.getElementById('PopularPosts1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar_bottom', document.getElementById('BlogArchive1'), {'languageDirection': 'ltr', 'loadingMessage': 'Загрузка\x26hellip;'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LabelView', new _WidgetInfo('Label1', 'sidebar_bottom', document.getElementById('Label1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_StatsView', new _WidgetInfo('Stats1', 'sidebar_bottom', document.getElementById('Stats1'), {'title': 'Статистика', 'showGraphicalCounter': false, 'showAnimatedCounter': false, 'showSparkline': true, 'statsUrl': '//42-21-school.blogspot.com/b/stats?style\x3dBLACK_TRANSPARENT\x26timeRange\x3dALL_TIME\x26token\x3dAPq4FmAm1yCdB7-QUd055IPmznLRiSQrTWop5BFZ8dbnrO35dNsGenbjl1gQU6umpBhlitPQ51MU7xLiWi0JGyQIuV4Y_RL1rw'}, 'displayModeFull'));
+</script>
+</body>
+</html>
