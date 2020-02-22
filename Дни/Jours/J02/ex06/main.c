@@ -24,4 +24,4 @@ int		main()
 {
 	ft_putnbr(-123123);
 	return(0);
-}
+}         

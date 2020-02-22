@@ -19,7 +19,7 @@
 ---
 
 ## Материал: ##
-
+habr.com/ru/company/aktiv-company/blog/170829
 * https://github.com/colundrum/42_vogsphere_access
 * https://habr.com/ru/company/aktiv-company/blog/170829/
 * https://help.ubuntu.ru/wiki/руководство_по_ubuntu_server/авторизация_по_сети/kerberos
@@ -36,7 +36,7 @@ $> cd .. && mkdir ex03 && cd ex03 // Сразу подготовим папку
 $> kinit [USER][@REALM] // Подключаемся (и получаем тикет) к серверу через login Intra, если по дефолту не стоит нужный сервер, если стоит, то нет смысла писать user@21-SCHOOL.RU (может отличаться) → Далее прописываем пароль (!он не печатается в поле, тобишь его не видно при печати!), который нам выдали, при регстрации.
 $> klist //  Выводим список тикетов Kerberos
 
-$> klist > klist.txt //Создаем klist.txt с информацией из klist
+$> klist > klist.txt //Создаем klist.txt с информацией из klist   >> дописать >перезаписать
 $> touch klist.txt; gedit klist.txt // Вставляем скопированный текст и сохраняем
 
 $> kdestroy // Удалить получ. билет из кэша и закрыть соединение, сразу не выполнять, только после работы за пк.

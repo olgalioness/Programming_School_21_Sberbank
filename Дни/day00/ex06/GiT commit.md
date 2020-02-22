@@ -43,3 +43,7 @@ git log -n 5 --pretty="tformat:%Hn"
 3. [--pretty=](https://ru.hexlet.io/courses/git_base/lessons/introduction_to_git_log/theory_unit)
    * [%H](https://git-scm.com/book/ru/v2/Основы-Git-Просмотр-истории-коммитов)
    * %Hn - \n на последней строке
+
+#!/bin/sh
+git log --pretty=format:%H -5
+echo

@@ -1,7 +1,9 @@
 
 0-0 Assignment name  : aff_a   |    Expected files   : aff_a.c   |    Allowed functions: write
 Write a program that takes a string, and displays the first 'a' character it encounters in it, followed by a newline. If there are no 'a' characters in the string, the program just writes a newline. If the number of parameters is not
-1, the program displays 'a' followed by a newline.
+1, the program displays 'a' followed by a newline. 
+Напишите программу, которая берет строку и отображает первый символ 'a', с которым она сталкивается, за которым следует новая строка. Если в строке нет символов "a", программа просто записывает новую строку. Если количество параметров отсутствует
+1, программа отображает "a", за которым следует новая строка.
 Example:
 $> ./aff_a "abc" | cat -e
 a$

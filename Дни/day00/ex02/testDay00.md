@@ -55,7 +55,7 @@ $> cd ex01      // Заходим в каталог ex01
 
 $> touch testDay00  // Создаем файл
 $> dd if=/dev/zero of=testDay00 bs=40 count=1 //Меняем размер файла if=заполнить нулем, of=файл, bs=колл-во байт, count=сколько блоков надо скопировать
-touch -amt 201906012342 testDay00    // Меняем временную метку файла
+touch -amt 201906012342 testDay00    // Меняем временную метку файла  (дату создания и модификации )
 stat testDay00                   
 16777220 12886248599 -rw-r--r-- 1 olik staff 0 40
  "Jun  1 23:42:00 2019" 
@@ -81,11 +81,11 @@ https://shneider-host.ru/blog/sozdanie-i-raspakovka-tar-arhivov-v-unix-sistemah.
 https://help.ubuntu.ru/wiki/стандартные_права_unix
 
 ```
-$> tar –cf testDay00.tar testDay00 // Создаем архив и запаковываем туда файл
+$> tar –cf testDay00.tar testDay00 // Создаем архив и запаковываем туда файл   c - создать новый файл, v - показать прогресс, f - тип имени файла архива
 
 
 $> rm testDay00 // Удаляем файл, чтобы остался только архив
-tar -tf testDay00.tar // распаковываем архив  -xvf 
+tar -tf testDay00.tar // распаковываем архив  -xvf     
 ls -l.   // проверяем
 rm testDay00
 

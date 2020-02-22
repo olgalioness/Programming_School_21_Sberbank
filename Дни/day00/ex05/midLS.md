@@ -28,3 +28,6 @@ $> man ls // Выведем руководство / мануал комм. Ls
 
 $> echo “ls –U –m –p” > mid LS
 ```
+ls -Utmpr 
+chmod +x midLS
+

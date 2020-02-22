@@ -1,4 +1,4 @@
-| 			   |	ex10              |
+    | 			   |	ex10              |
 | ------------------ | -------------------|
 | Illusions, not tricks, Michael...       |
 | Turn-in directory  | 	ex10/             |

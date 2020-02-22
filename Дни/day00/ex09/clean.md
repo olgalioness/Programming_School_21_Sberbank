@@ -34,6 +34,13 @@ $> find . \( -type f -name '*~' -o -name '#*#' \) -print –delete
    3. `–name ‘<параметры поиска>'` - can use wildcards
       1. `*` - [pattern](https://younglinux.info/pattern)
       2. `'*~'` – заканчивается на ~, `'#*#'` – заканчивается и начинается на #
-   4. `–o` - или
+   4. `–o` - или   
 3. `-print` - показать на экране найденные результаты
 4. `-delete` - удалить соответствующие результаты
+
+find . -type f -name "#*#" -delete -o -name "*~" -delete
+find . -type f -name "#*#" -print -delete -or -type f -name "*~" -print -delete
+find . -type f -name "*~" -print -delete -or -type f -name "#*#" -print -delete
+
+
+find .  -name "#*#"-print -delete; find . -name "*~" -print -delete
