@@ -1,0 +1,5 @@
+/Users/jjerde/Day09/ex08/ft_spy.c:35:7: error: expected ';' after expression
+                        ++i
+                           ^
+                           ;
+1 error generated.

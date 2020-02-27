@@ -1,0 +1,31 @@
+\# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefiles                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rfork <marvin@42.fr>                       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/08/12 13:02:17 by rfork             #+#    #+#              #
+     Updated: 2019/08/13 11:35:28 by rfork            ###   ########.fr         
+#                                                                              #
+# **************************************************************************** #
+
+NAME = libft.a
+SRCS = ./srcs/ft_putchar.c ./srcs/ft_putstr.c ./srcs/ft_strcmp.c\
+	    ./srcs/ft_swap.c ./srcs/ft_strlen.c
+OBJECT = ft_putchar.o ft_putstr.o ft_strcmp.o ft_swap.o ft_strlen.o
+INCLUDES = ./includes
+
+all: $(NAME)
+
+$(NAME):
+	gcc -c $(SRCS) -I $(INCLUDES)
+	ar rc $(NAME) $(OBJECT)
+
+clean:
+	rm -f $(OBJECT)
+
+fclean clean
+	rm -f $(NAME)
+
+re: fclean all

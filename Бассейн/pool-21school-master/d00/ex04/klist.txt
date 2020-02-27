@@ -1,0 +1,4 @@
+krbtgt/21-SCHOOL.RU@21-SCHOOL.RU
+dap/ldap-master.21-school.ru@21-SCHOOL.RU
+HTTP/storage-student.21-school.ru@21-SCHOOL.RU
+host/vogsphere.21-school.ru@21-SCHOOL.RU

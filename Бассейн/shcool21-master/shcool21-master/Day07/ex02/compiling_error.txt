@@ -1,0 +1,10 @@
+/Users/jjerde/Day07/ex02/main.c:8:8: error: incompatible integer to pointer conversion initializing 'int **' with an expression of type 'int' [-Werror,-Wint-conversion]
+        int **range = 3;
+              ^       ~
+/Users/jjerde/Day07/ex02/main.c:9:20: error: incompatible pointer types passing 'int *' to parameter of type 'int **'; remove * [-Werror,-Wincompatible-pointer-types]
+        ft_ultimate_range(*range, 11, 22);
+                          ^~~~~~
+/Users/jjerde/Day07/ex02/main.c:4:29: note: passing argument to parameter 'range' here
+int ft_ultimate_range(int **range, int min, int max);
+                            ^
+2 errors generated.

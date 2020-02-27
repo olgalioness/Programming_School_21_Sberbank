@@ -1,0 +1,13 @@
+/Users/jjerde/Day09/ex10/main.c:4:9: error: incompatible integer to pointer conversion initializing 'int ***' with an expression of type 'int' [-Werror,-Wint-conversion]
+        int ***a = 1;
+               ^   ~
+/Users/jjerde/Day09/ex10/main.c:5:7: error: incompatible integer to pointer conversion initializing 'int *' with an expression of type 'int' [-Werror,-Wint-conversion]
+        int *b = 2;
+             ^   ~
+/Users/jjerde/Day09/ex10/main.c:6:13: error: incompatible integer to pointer conversion initializing 'int *******' with an expression of type 'int' [-Werror,-Wint-conversion]
+        int *******c = 3;
+                   ^   ~
+/Users/jjerde/Day09/ex10/main.c:7:10: error: incompatible integer to pointer conversion initializing 'int ****' with an expression of type 'int' [-Werror,-Wint-conversion]
+        int ****d = 4;
+                ^   ~
+4 errors generated.
