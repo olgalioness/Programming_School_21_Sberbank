@@ -1,1 +1,0 @@
-# Piscine-C-42partnerships-42Labs-Rush-00

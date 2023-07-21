@@ -1,1 +1,0 @@
-gcc -o NAME_OF_PROGRAM main.c libft.a

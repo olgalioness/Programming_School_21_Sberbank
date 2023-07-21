@@ -1,7 +1,0 @@
-/Users/jjerde/Day05/ex15/mainprogramm.c:22:29: error: too many arguments to function call, expected single argument 'str', have 2 arguments
-        char *str = ft_strcat(str1,str2);
-                    ~~~~~~~~~      ^~~~
-/Users/jjerde/Day05/ex15/mainprogramm.c:16:1: note: 'ft_strcat' declared here
-int     ft_strcat(char *str);
-^
-1 error generated.

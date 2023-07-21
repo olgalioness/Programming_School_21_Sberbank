@@ -1,7 +1,0 @@
-Credentials cache: API:10512
-        Principal: rfork@21-SCHOOL.RU
-
-  Issued                Expires               Principal
-Jul 30 08:35:52 2019  Jul 30 18:35:52 2019  krbtgt/21-SCHOOL.RU@21-SCHOOL.RU
-Jul 30 08:35:53 2019  Jul 30 18:35:52 2019  ldap/ldap-master.21-school.ru@21-SCHOOL.RU
-Jul 30 08:35:53 2019  Jul 30 18:35:52 2019  HTTP/storage-student.21-school.ru@21-SCHOOL.RU
